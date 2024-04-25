@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string>
+
+//Desenvolva uma aplicação que gerencie um estoque de um produto.
+//O programa deve ter um menu com opcoes de "Adicionar ao Estoque", "Remover do Estoque", "Exibir Quantidade em Estoque", "Sair do Programa" 
+//O limite do estoque é de 100 e você não pode inserir mais do que isso." 
+//Também não pode remover do estoque ao ponto que ele se torne negativo."
+//Use Case para controlar as escolhas do utilizador no Menu.
+//Use While para que o programa se mantenha em execução até que o utilizador deseje sair."
+//Use If para verificar condições específicas.
+
+using namespace std;
+
+int main(int argc, char** argv) {
+	
+    int opcao, contador, start, contador1;
+
+    start = 0;
+    contador = 0;
+    contador1 = 0;
+   
+    while (start == 0) {
+       	
+		cout << "------------------Menu------------------" << endl;
+		cout << "1 - Deseja adicionar mais?" << endl;
+		cout << "2 - Deseja retirar algo?" << endl;
+		cout << "3 - Deseja exibir a quantidade que pediu?" << endl;
+		cout << "0 - sair" << endl;
+		cin >> opcao;
+		
+		  switch (opcao) {
+	
+		  	case 1:
+		  		cout << "Quanto deseja adicionar?" << endl;
+		  		cin >> contador;
+		  		contador1 = contador1 + contador;
+		       	if (contador1 > 100) {
+			        cout << "não foi possivel adicionar, está maior que o limite" << endl;
+					contador1 = contador1 - contador; 
+				} else {
+			    	cout << "Resultado:" << contador1 << endl;
+			   	}	  
+		 	break; 
+			     
+		  	case 2:
+				cout << "Digite a quantidade que quer retirar" << endl;
+				cin >> contador;
+				contador1 = contador1 - contador;
+				if (contador1 <= 0) { 
+					cout << "não é possivel tirar mais" << endl;
+					contador1 = contador1 + contador;
+				} else {
+					cout << "Resultado:" << contador1 << endl;
+				}	
+			break;
+			
+		    case 3:
+		      cout << contador1 << endl;    
+			break;
+		
+			case 0:
+			   start = 1;
+			   cout << "Execução terminada" << endl;
+			break;	 
+		   			 	           
+	    break;      
+	}	
+}
+	return 0;
+}
+

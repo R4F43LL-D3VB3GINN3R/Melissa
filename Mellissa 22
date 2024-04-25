@@ -1,0 +1,102 @@
+#include <iostream>
+#include <string>
+
+//Desenvolva um programa que crie um menu com as opções: 
+//1 - Contar de 1 até número e imprimir na tela...
+//2 - Contar de número até 0 e imprimir na tela...
+//3 - Contar de 1 até número e imprimir os pares na tela...
+//4 - Contar de 1 até número e impirmir os ímpares na tela...
+//5 - Opção de encerrar o programa...
+
+using namespace std;
+
+//Restrições: 
+//*O programa deve se manter em execução até o utilizador decidir sair usando o menu...
+//*O utlizador não pode escolher um número acima de 100 em nenhum caso...
+//*O utlizador não pode escolher um número menor do 0 em nenhum caso... 
+
+int main(int argc, char** argv) {
+	
+	int opcao, start, contador;
+	
+
+    start = 0;
+	
+	while (start == 0) {
+		
+		cout << "------------------Menu--------------------" << endl;
+		cout << "1 - Deseja contar de 1 até o número selecionado e imprimir?" << endl;
+		cout << "2 - Fazer a contagem regressiva do número selecionado até 0" << endl;
+		cout << "3 - Deseja contar de 1 até o número selecionado, apenas os números pares" << endl;
+		cout << "4 - Deseja contar de 1 até o número selecionado, apenas os impares" << endl;
+		cout << "0 - Sair" << endl;
+		cin >> opcao;
+		
+		switch (opcao) {
+		
+		   case 1:
+
+         cout << "Que número deseja?" << endl;
+         cin >> contador;
+
+         if (contador > 100) {
+         cout << "Número maior que o permitido" << endl;
+         } else {	   	       
+          for (int num = 1; num <= contador; num++) {
+          cout << num << ",";
+         }
+          cout << " " << endl;
+				 }
+		   break;
+		   case 2:
+		   	      cout << "Que número deseja?" << endl;
+		   	      cin >> contador;
+
+		   	      for (int num = contador; num >= 0; num--) {
+                  cout << num << ","; 
+		          }
+		      
+		   break;
+		   case 3:
+		          cout << "Que número deseja?" << endl;
+				      cin >> contador;
+
+				   if (contador > 100) {
+		   	       	cout << "Número maior que o permitido" << endl;
+					  } else {	  
+
+				      for (int num = 0; num <= contador; num++) {
+				  	
+				  	if (num % 2 == 0) { 							  
+				  	  cout << num << ",";
+				    }
+				    }
+                cout << " " << endl;
+            }
+
+           break;
+           case 4:
+              cout << "Que número deseja?" << endl;
+              cin >> contador;
+
+              if (contador > 100) {
+
+		   	       	cout << "Número maior que o permitido" << endl;
+					    } else {	  
+
+				        for (int num = 0 ; num <= contador; num+=2) {
+				  	      cout << num << ",";
+				        }
+                  cout << " " << endl;
+                }     
+           break;   	
+           case 0:
+           	  start = 1;
+  			   cout << "Execução terminada" << endl;
+  			   break;         
+	  } 
+				
+	}
+		
+	return 0;
+}

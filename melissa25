@@ -1,0 +1,91 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+
+using namespace std;
+
+//Realiza as Tarefas com Vetores: 
+
+// 1. Crie 4 vetores de tipos diferentes(char, string, int, float)
+// 2. Os vetores devem ter tamanho(char 10, string 3, int 50, float 25)
+// 3. Dê nomes aos vetores referentes aos seus tipos(ex: vet_string)
+// 4. Insira elementos nos vetores respeitando o tipo de dados que eles aceitam.
+// 5. Crie um menu com 4 opções, em qual cada opção percorre um dos vetores e imprime na tela os valores dentro deles.
+
+
+int main(int argc, char** argv) {
+	
+      int start, opcao;
+	   
+	start = 0;
+	
+	 while (start == 0) {
+	 	
+	cout << "1- escrever vetor_int (números inteiros 50x)" << endl;
+	cout << "2- escrever vetor_strings (números em extenso de 1 a 10)" << endl;
+	cout << "3- escrever vetor_char (3 vogais)" << endl;
+	cout << "4- escrever vetor_floats (números decimais arredondados de 0.1 a 0.25" << endl;
+	cout << "0- sair" << endl;
+	cin >> opcao;
+	  
+	  
+	int vetor[50] = {10, 20, 30, 40, 50, 10, 20, 30, 40, 50, 10, 20, 30, 40, 50, 10, 20, 30, 40, 50, 10, 20, 30, 40, 50, 10, 20, 30, 40, 50, 10, 20, 30, 40, 50, 10, 20, 30, 40, 50, 10, 20, 30, 40, 50, 10, 20, 30, 40, 50 }; // vetor de 
+	
+	for (int a = 0; a <= 50; a++) { //contamos com inteiro, ja que a contagem começa do zero até o número de elementos
+		//fazemos isso dentro do for, pois a variavel "a" assim como a dos outros vetores não pegam fora do for (so se for uma variavel global)
+		switch (opcao) {
+			
+			case 1:
+				cout << vetor[a] << endl;
+				
+   }
+
+
+}
+	
+// podemos ter vetores de todos os tipos mas alguns teem jeitos diferentes de serem escritos, ex: vetor de  char e strings
+	string vetor_strings[10] = {"um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez" };
+	
+	for (int b = 0; b < 10; b++) { // adicionamos ate o número de elementos maximos (de 0 até 10)
+	 
+	 switch (opcao) {
+	 	
+			case 2:
+				cout << vetor_strings[b] << endl; // escrevemos o vetor usando o nome e a variavel que guarda os elementos
+					
+      }
+}
+
+   char vetor_char[3] = {'a', 'b', 'c'};
+   
+    for (int d = 0; d < 3; d++) {
+   		 switch (opcao) {
+	 	
+			case 3:
+				cout << vetor_char[d] << endl;
+						
+       }
+ 
+}
+		
+    
+    float vetor_floats[25] = {1.0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.10, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20, 0.21, 0.22, 0.23, 0.24, 0.25 };
+    
+     for (int e = 0; e <= 25; e++) { //normalmente os números são arredondados
+     	switch (opcao) {
+	 	
+			case 4:
+				cout << vetor_floats[e] << endl;
+						
+       } 
+}
+		 switch(opcao) {
+		 
+		  case 0:
+           	  start = 1;
+  			   cout << "Execução terminada" << endl;  
+  			   break;
+			}
+}
+	return 0;
+}

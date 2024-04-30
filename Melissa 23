@@ -1,0 +1,50 @@
+#include <iostream>
+
+using namespace std;
+
+int main(int argc, char** argv) {                                  //aula mais facil que ja tive
+	
+	//alocação estatica // antes de começar eu ja informei
+	
+	
+	//int vet[4];
+	//vet[0]=5;
+	//vet[1]=10;
+	
+   //apenas dois elementos//
+//	int vet[4] = {5,10}; // vet[4] = iniciamos um conjunto de quatro elementos(0 a 3) pode ser inteiro, real, boleana...etc
+	                     // 5 vai ser o valor do vet[0] e 10 vai ser o valor do vet[1]
+	                     
+	//cout << ve[2] << endl; ja que esse vetor não está declarado, ele vira 0
+//	cout << "[ ";
+//	for (int i=0 ; i<4 ; i++){ // i tem o valor de 0, já que começa no 0 a contagem e vai até no 4, pois são apenas 4 elementos
+//	     cout << vet[i] << " ";	// i agora é a variavel que guarda esses vetores e vai do vetor 0 até o vetor 3    
+//	 }
+//	 cout << " ]" << endl;
+	 
+//	 int x = sizeof(vet)/sizeof(int); // aqui vemos o tamanho de bites, ou seja quanto cada uma vale, ja que o vetor tem 4 elementos cada elemento é 4
+	                                  // logo teremos 16, dividimos pela quantidade de inteiros, tendo assim o resultado
+//	 int y = sizeof(int); // aqui vemos o número de inteiros, ou seja, ja que o vetor tem 4 elementos o resultado da contagem, será 4
+//	 cout << "tamanho de inteiro:" << y << endl;
+//	 cout << "Quantidade de elementos do vetor: " << x << endl;
+	 
+	 //Alocação dinamica
+	 int  tamanho;
+	 cout << "Digite o tamanho do vetor!" << endl; //digitar o tamanho do vetor
+	 cin >> tamanho;
+	 int* vetor = new int[tamanho]; //ja declarei o vetor, porem so vou saber quando o usuario der o valor ao tamanho
+	 
+	 //I SO VAI FUNCIONAR DENTRO DO FOR
+	 for (int i=0; i<tamanho ; i++){ 
+	      cout << "Digite o elemento " << i+1 << " do vetor:" << endl;
+		  cin >> vetor[i];	 //declaramos os elementos
+	 }
+	 
+	 for (int i=0; i<tamanho ; i++){ 
+	      cout << vetor[i] << " "; // escrevemos os elementos
+	      
+    }
+    cout << endl;
+	
+		return 0;
+}

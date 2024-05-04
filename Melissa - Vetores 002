@@ -1,0 +1,127 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+
+//Crie um menu com as seguintes opções: 
+//1.Inserir Vetor string
+//2.Inserir Vetor char
+//3.Inserir Vetor int
+//4.Inserir Vetor float
+//5.Sair do programa
+
+//Crie 4 vetores com estes 4 tipos de dados onde o tamanho dele será uma variável chamada 'tamanho'.
+//Quando o user escolher qualquer uma das opções, ele deve dizer qual será o 'tamanho' do vetor que (que não pode ser negativo ou maior do que 5)
+//Depois o user deve inserir dados no vetor.
+
+//for (int i=0; i<=tamanho; i++) {
+
+	//cout << "Insira o valor: ";
+	//cin >> variavel;
+
+	//ex = vetor[i] = variavel
+	
+//}
+
+//Depois que terminar de inserir, use outro for para percorrer o vetor e mostrar o que foi inserido.
+
+using namespace std;
+
+int main(int argc, char** argv) {
+
+int tamanho = 5;
+int start = 0;
+int opcao;
+
+string variavel;
+char variavel1;
+int variavel2;
+float variavel3;
+
+string vetor_strings[tamanho];
+char vetor_char[tamanho];
+int vetor_int[tamanho];
+float vetor_float[tamanho];
+	
+			while (start == 0) {
+    	
+	    cout << "1- Inserir Vetor string" << endl;
+	    cout << "2- Inserir Vetor char" << endl;
+	    cout << "3- Inserir Vetor int" << endl;
+	    cout << "4- Inserir Vetor float" << endl;
+	    cout << "5- Sair do programa" << endl;
+	    cin >> opcao;
+    
+    	switch (opcao) {
+    		
+    		case 1:
+			     	 cout << "Digite o tamanho:" << endl;
+					 cin >> tamanho;
+					 for (int a=0 ; a<tamanho ; a++) {
+					 	cout << "Digite os elementos do vetor:" << endl;
+					 	cin >> variavel;
+					 	vetor_strings[a] = variavel;					 	
+					 } for (int a=0 ; a<tamanho ; a++) {
+					 	cout << vetor_strings[a] << " ";
+					 }
+					    cout << " " << endl;
+					    		
+				break;
+				
+			case 2:
+				     cout << "Digite o tamanho:" << endl;
+					 cin >> tamanho;
+					 for (int i=0 ; i<tamanho ; i++) {
+					 	cout << "Digite as letras para o vetor:" << endl;
+					 	cin >> variavel1;
+					 	vetor_char[i] = variavel1;					 	
+					 } for (int i=0 ; i<tamanho ; i++) {
+					 	cout << vetor_char[i] << " ";
+					 }
+					    cout << " " << endl;
+					    		
+				break;
+			
+			case 3:
+					cout << "Digite o tamanho:" << endl;
+					cin >> tamanho;
+					for (int b=0 ; b<tamanho ; b++) {
+					 	cout << "Digite os números para o vetor:" << endl;
+					 	cin >> variavel2;
+					 	vetor_int[b] = variavel2;					 	
+					 } for (int b=0 ; b<tamanho ; b++) {
+					 	cout << vetor_int[b] << " ";
+					 }					
+					    cout << " " << endl;
+					    		
+			    break;
+			
+			case 4:
+			      	cout << "Digite o tamanho:" << endl;
+					cin >> tamanho;
+					for (int c=0 ; c<tamanho ; c++) {
+					 	cout << "Digite os números decimais para o vetor:" << endl;
+					 	cin >> variavel3;
+					 	vetor_float[c] = variavel3;					 	
+					 } for (int c=0 ; c<tamanho ; c++) {
+					 	cout << vetor_float[c] << " ";
+					 }					
+					    cout << " " << endl;
+					    		
+			    break;
+			    
+			case 5:
+                    start = 1;
+					cout << "execução terminada" << endl;
+					break;			
+						   
+			default:
+	
+				break;
+    		
+		}
+    	
+	}
+      
+return 0;
+
+}

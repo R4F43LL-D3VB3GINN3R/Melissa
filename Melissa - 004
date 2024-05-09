@@ -1,0 +1,127 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+
+//Crie um menu com as seguintes opções: 
+//1.Cadastrar
+//2.Exibir
+//3.Pesquisar nome
+//4.Sair do programa
+
+//Na opção 1, o utilizador deve dizer quantas pessoas irão se cadastrar. 
+//O cadastro deve receber um vetor string para o nome, um vetor int para a idade, um vetor char para o sexo e um vetor float para o peso.
+//Na opção 2, você deve percorrer os vetores para exibir os dados das pessoas cadastradas.
+//Na opção 3, você deve pesquisar um nome no cadastro e exibi-lo caso seja achado.
+
+//	cout << "Pesquise o nome no cadastro: " << endl;
+//	cin >> nome;
+//	
+//	for (int i = 0; i < 3; i++) {
+//		
+//		if (nome == vet_string[i]) {
+//			
+//			cout << "informacao encontrada: " << vet_string[i];
+//			
+//		} 
+//		
+//	}
+
+using namespace std;
+
+int main(int argc, char** argv) {
+	
+	int opcao;
+	int tamanho = 5;
+	string pesquisa;
+	
+   string variavel_nomes;
+   int variavel_idades;
+   char variavel_sexos;
+   float variavel_pesos;
+   
+   string vetor_nomes[tamanho];
+   int vetor_idades[tamanho];
+   char vetor_sexos[tamanho];
+   float vetor_pesos[tamanho];
+   
+   while (true) {
+   	    
+   	    cout << "1- Cadastrar" << endl;
+		cout << "2- exibir" << endl;
+		cout << "3- Procurar dados" << endl;
+		cout << "4- Sair do programa" << endl;
+		cin >> opcao;
+		
+		switch (opcao) {
+			case 1:
+				
+				cout << "Quantas pessoas vão se cadastrar?" << endl;
+				cin >> tamanho;
+				
+				if (tamanho >= 5 || tamanho < 0)  {
+			 		cout << "Número de cadastros não possivel" << endl; 
+					 } else {
+				    for (int a=0 ; a<tamanho ; a++) {
+				   	
+						cout << "--------------------------------" << endl;	
+				    	cout << "Digite seu nome:" << endl;
+					 	cin >> variavel_nomes;
+					 	vetor_nomes[a] = variavel_nomes;
+					 	
+				    	cout << "Digite sua idade:" << endl;
+					 	cin >> variavel_idades;
+					 	vetor_idades[a] = variavel_idades;
+					 	
+				  		cout << "Digite seu genero:" << endl;
+					 	cin >> variavel_sexos;
+					 	vetor_sexos[a] = variavel_sexos;
+						 				
+				  		cout << "Digite seu peso:" << endl;
+					 	cin >> variavel_pesos;
+					 	vetor_pesos[a] = variavel_pesos;
+				  		cout << "--------------------------------" << endl;		 													
+					}
+					
+			      	cout << " " << endl;
+			  }
+			break;
+			
+			case 2:
+				cout << "---------cadastro--------" << endl;
+				for (int a=0 ; a<tamanho ; a++) {
+					
+					cout << "Nome: " <<  vetor_nomes[a] << endl;
+					cout << "Idade: " << vetor_idades[a] << endl;
+			    	cout << "Sexo: " << vetor_sexos[a] << endl;		
+					cout << "Peso: " << vetor_pesos[a] << endl;	 
+		}
+			   		cout << "-------------------------" << endl;
+					   
+			break;
+			
+			case 3:
+			    cout << "Pesquise o nome no cadastro: " << endl;
+			    cin >> pesquisa;
+			    for (int i=0 ; i<tamanho ; i++) {
+				if (pesquisa == vetor_nomes[i]) {	   	       
+			    cout << "informacao encontrada: " << vetor_nomes[i] << endl;
+			    cout << "idade: " << vetor_idades[i] << endl;
+			    cout << "Sexo: " << vetor_sexos[i] << endl;		
+				cout << "Peso: " << vetor_pesos[i] << endl;	 
+		}		      
+	}   
+                cout << " " << endl;	
+	
+            break;
+			
+			case 4:
+			    cout << "Execução terminada" << endl;
+		    	return 0;	      	
+	
+		}
+   	    
+   }
+ 	
+	
+	return 0;
+}

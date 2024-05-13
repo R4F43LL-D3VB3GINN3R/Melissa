@@ -1,0 +1,173 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+
+#define MAX 5
+
+//Crie um menu com as seguintes opções: 
+//1.Cadastrar
+//2.Exibir
+//3.Pesquisar nome (Só exibe os disponíveis)
+//4.Realizar Compra
+//5.Sair do programa
+
+//O programa consiste em um cadatro de livros com (string titulo, float preco, char disponivel (s ou n), int quantidade;
+//Cadastre os livros...
+//Mostre apenas os disponíveis.
+
+//-----------------------------------------------------------------------------------------------------------------------
+							//Para realizar a compra pesquise por nome, 
+							//Pergunte se quer comprar o livro encontrado
+							//Pergunte quantos livros quer comprar
+							//Se a compra for efetuada...
+							//Diminui a quantidade de livros daquele título em estoque...
+							//A quantidade também será diminuída da sua carteira...
+							
+							//variavel_carteira = variavel_carteira - preco;
+							//vetor_quantidade[i] = vetor_quantidade[i] - quantidade;
+							
+							//PS: A carteira não pode ficar negativa...
+							//PS: Você não pode comprar uma quantidade de livros maior do que a que existe em estoque...
+//-----------------------------------------------------------------------------------------------------------------------
+
+using namespace std;
+
+int main(int argc, char** argv) {
+		
+	int opcao;
+	int tamanho = 5;
+	string pesquisa;
+	float carteira=100.00;
+	int quant = 1;
+	
+	string variavel_titulo;
+	int variavel_quant;
+	char variavel_disp;
+	float variavel_prec;
+	
+	string vetor_titulo[tamanho];
+	int vetor_quant[tamanho];
+	char vetor_disp[tamanho];
+	float vetor_prec[tamanho];
+	
+	while (true) {
+		
+		cout << "1- cadastrar livro" << endl;
+		cout << "2- Exibir (apenas os disponiveis)" << endl;
+		cout << "3- Pesquisar o livro" << endl;
+		cout << "4- Realizar compra" << endl;
+		cout << "5- Sair do programa" << endl;
+		cin >> opcao;
+		
+		switch(opcao) {
+			
+			case 1:
+				
+				cout << "Quantos livros pretende cadastrar" << endl;
+				cin >> tamanho;
+				if (tamanho >= MAX || tamanho < 0) {
+					cout << "Numero de cadastro invalido" << endl;
+				} else {
+					
+					
+					for (int a = 0 ; a<tamanho ; a++) {
+						cout << "-----------------------------" << endl;
+						cout << "Qual será o nome do livro" << endl;
+						cin >> variavel_titulo;
+						vetor_titulo[a] = variavel_titulo;
+						
+						cout << "Quantos livros deste?" << endl;
+						cin >> variavel_quant;
+						vetor_quant[a] = variavel_quant;
+						
+						cout << "Esta disponivel ou não?" << endl;
+						cin >> variavel_disp;
+						vetor_disp[a] = variavel_disp;
+						
+						cout << "Qual é o preço?" << endl;
+						cin >> variavel_prec;
+						vetor_prec[a] = variavel_prec;
+					    cout << "-----------------------------" << endl;
+					}
+				}
+				        cout << "-----------------------------" << endl;
+			break;
+			
+			case 2:
+			    
+				for (int a=0 ; a<tamanho ; a++) {
+					if (vetor_disp[a] == 's') {
+					   cout << "----------livros-----------" << endl;
+					   cout << "nome: " << vetor_titulo[a] << endl;
+					   cout << "quantidade: " << vetor_quant[a] << endl;
+					   cout << "preço: " << vetor_prec[a] << endl;
+					   cout << "---------------------------" << endl;				  	
+					}
+				}
+				cout << "-----------------------------" << endl;
+			break;
+			
+			case 3:
+			   
+			   cout << "pesquise o nome do livro que deseja" << endl;
+			   cin >> pesquisa;
+			   
+			   for (int a = 0; a<tamanho; a++) {
+			   	   if (vetor_disp[a] == 's' && pesquisa == vetor_titulo[a]) {
+			   	   	  cout << "-----------------------------" << endl;
+			   	   	  cout << "Nome: " << vetor_titulo[a] << endl;
+			   	   	  cout << "quantidade: " << vetor_quant[a] << endl;
+			   	   	  cout << "preço: " << vetor_prec[a] << endl;
+			   	   	  cout << "-----------------------------" << endl;
+					  } 
+			   	    cout << "-----------------------------" << endl;
+			   }
+			        cout << " " << endl;
+			break;
+			
+			case 4:
+			
+			   cout << "Deseja comprar um livro?" << endl;
+			   cin >> pesquisa;
+			   if (pesquisa == "nao") {
+			   	cout << "Ok!" << endl;
+			   }
+			   for (int a=0; a< tamanho; a++) {
+			   	   if (vetor_disp[a] == 's') {
+			   	   	cout << "Qual livro?" << endl;
+			   	   	cin >> pesquisa;
+			   	   	
+			   	   	for  (int b=0 ; b<tamanho; b++) {
+			   	   		
+			   	   		if (pesquisa == vetor_titulo[b]) {
+			   	   		
+		   	   				cout << "qual a quantidade?" << endl;
+		   	   				cin >> quant;
+		   	   				if (quant < 0 || quant > vetor_quant[b]) {
+		   	   				 cout << "Erro! compra nao pode ser realizada pela falta de dinheiro ou pela quantidade elevada de livros" << endl;
+							}else {
+								if (carteira < vetor_prec[b] || carteira < 0) { 
+			   	   					cout << "Erro! compra nao pode ser realizada pela falta de dinheiro ou pela quantidade elevada de livros" << endl;	
+								} else {
+				   	   				carteira = carteira - (vetor_prec[b] * quant);
+				   	   				vetor_quant[b] = vetor_quant[b] - quant;
+				   	   				cout << "Compra feita " << " Saldo: " << carteira << endl;		   	   	   
+				      			}
+							}
+						}
+				  	}
+			    }
+			   }
+			   break;
+				
+				case 5:
+	                cout << "execução terminada" << endl; 
+					return 0;
+					
+				break;	 					    	        
+		}              
+		
+	}	
+	
+	return 0;
+}

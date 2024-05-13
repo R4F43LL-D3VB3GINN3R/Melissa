@@ -1,0 +1,172 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+
+//Crie um menu com as seguintes opções: 
+//1.Cadastrar
+//2.Exibir
+//3.Pesquisar nome (Só exibe os disponíveis)
+//4.Realizar Compra
+//5.Sair do programa
+
+//O programa consiste em um cadatro de livros com (string titulo, float preco, char disponivel (s ou n), int quantidade;
+//Cadastre os carros...
+//Mostre apenas os disponíveis.
+//Pesquise por nome e realize uma compra, se o utilizador quiser comprar, a quantidade será diminuída..
+
+//vetor_quantidade[i] = vetor_quantidade[i] - 1;
+
+//Altere a disponibilidade.
+
+//	cout << "Pesquise o automóvel: " << endl;
+//	    cin >> pesquisa;
+
+//	    for (int i=0 ; i<tamanho ; i++) {
+//			if (pesquisa == vetor_nomes[i]) {
+
+//				char resposta = 's';	
+//				char disp = 's';   	       
+//				
+//				cout << "Quer alterar a disponibilidade?" << endl;
+//				cin >> resposta;
+//			
+//			if (resposta == 's') {
+//				
+//				cout << "Insira (s ou n)";
+//				cin >> disp;
+//				
+//				vetor_sexos[i] = disp;
+//				*
+//			}
+//		}
+//	}
+
+using namespace std;
+
+int main(int argc, char** argv) {
+	
+	int opcao;
+	int tamanho = 5;
+	string pesquisa;
+	
+	string variavel_titulo;
+	int variavel_quant;
+	char variavel_disp;
+	float variavel_prec;
+	
+	string vetor_titulo[tamanho];
+	int vetor_quant[tamanho];
+	char vetor_disp[tamanho];
+	float vetor_prec[tamanho];
+	
+	while (true) {
+		 
+		 cout << "1- Cadastrar livro" << endl;
+		 cout << "2- Exibir (exibir apenas os disponiveis)" << endl;
+		 cout << "3- Pesquisar o nome do livro (exibe apenas os disponiveis)" << endl;
+		 cout << "4- Realizar compra" << endl;
+		 cout << "5- Sair do programa" << endl;
+		 cin >> opcao;
+		 
+		 switch(opcao) {
+		 	
+		 	case 1:
+		 		
+		 		cout << "quantos livros se pretende cadastrar?" << endl;
+		 		cin >> tamanho;
+		 		
+		 		if (tamanho >= 5 || tamanho < 0) {
+		 			cout << "Numero de cadastros impossivel" << endl;
+				 } else {
+		 		
+		 		for (int a = 0 ; a < tamanho ; a++) {
+		 		cout << "Qual o nome do livro?" << endl;
+		 		cin >> variavel_titulo;
+		 		vetor_titulo[a] = variavel_titulo;	
+		 		
+		 		cout << "Quantos livros deste?" << endl;
+		 		cin >> variavel_quant;
+		 		vetor_quant[a] = variavel_quant;
+		 		
+		 		cout << "Esta disponivel ou não?" << endl;
+		 		cin >> variavel_disp;
+		 		vetor_disp[a] = variavel_disp;
+		 		
+		 		cout << "Qual é o preço?" << endl;
+		 		cin >> variavel_prec;
+		 		vetor_prec[a] = variavel_prec;
+		 	}
+		 }
+		        cout << " " << endl;
+		   break;
+		   
+	   case 2:
+			   for (int a = 0 ; a<tamanho ; a++) {
+			   	if (vetor_disp[a] == 's') {
+			   	cout << "----------livros-----------" << endl;
+			   		cout << "Nome: " << vetor_titulo[a] << endl;
+			   		cout << "quantidade: " << vetor_quant[a] << endl;
+			   		cout << "preço: " << vetor_prec[a] << endl;
+			   	cout << "--------------------------" << endl;				   		
+			   }     
+		        cout << " " << endl;
+	   }  
+	       break;
+		   
+		   case 3:
+		       
+		       cout << "pesquise o nome do livro" << endl;
+		       cin >> pesquisa;
+		       
+		       for (int a = 0; a<tamanho; a++) {
+		       	   if (vetor_disp[a] == 's') {
+		       	   	cout << "---------------------------------" << endl;
+		       	   	cout << "Nome: " << vetor_titulo[a] << endl;
+			   		cout << "quantidade: " << vetor_quant[a] << endl;
+			   		cout << "preço: " << vetor_prec[a] << endl;
+					  } else {
+					  	cout << "Livro indisponivel" << endl;
+					  } 
+					cout << "---------------------------------" << endl;
+			   }
+		            cout << " " << endl;
+		            
+		    break;
+			
+			case 4:
+			    cout << "Deseja comprar um livro?" << endl;
+				cin >> pesquisa;
+				for (int a = 0; a<tamanho; a++) {
+					
+		       	   if (vetor_disp[a] == 's') {
+		       	   cout << "Qual livro?" << endl;
+		       	   cin >> pesquisa;
+		       	   
+		       	for (int b= 0; b< tamanho ; b++) {
+		       		
+				   if (pesquisa == vetor_titulo[b]) {
+	  
+		       	   cout << "compra feita" << endl;
+		       	   vetor_quant[b] = vetor_quant[b] - 1;
+					  } else {
+					  	cout << "Livro indisponivel" << endl;
+					  } 
+					cout << "---------------------------------" << endl; }
+				}
+					
+			}
+			
+		            cout << " " << endl;
+		    break;
+			
+			case 5:
+                cout << "execução terminada" << endl; 
+				return 0;
+				
+			break;	 			
+			        		            
+	}
+}
+	
+	return 0;
+}

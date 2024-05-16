@@ -1,0 +1,253 @@
+#include <iostream>
+#include <string>
+#include <cstring>	
+
+
+//Crie um programa que contenha um menu com as seguintes opções:
+//1. Cadastrar Cliente [string nome, string email, int idade, char disponibilidade (s ou n)]
+//2. Alterar Cliente [Altera qualquer dado relacionado ao cliente (nome, string, email ou disponibilidade)]
+//3. Listar Todos os Clientes
+//4. Listar Disponíveis
+//5. Remover Cliente [Remove o cliente e qualquer dado relacionado a ele] colocar x
+//6. Sair do Programa.
+
+//Antes de ter acesso ao menu o utilizador deve preencher um login e uma senha(defina o login e uma senha para o seu programa).
+//Se ele errar 3 vezes a senha, o programa será encerrado.
+//A cada erro, deve ser motrado o numero de tentativas que lhe faltam.
+//Se acertar a senha e o login, ele terá acesso ao menu.
+
+//PS - Não é preciso dizer quantas pessoas quer cadastrar no momento do cadastro.
+//PS2 - Escreva o programa em inglês.
+//PS3 - Tente dar consistência aos campos (Ex: idade não pode ser negativa ou maior que 100).
+
+using namespace std;
+
+int main(int argc, char** argv) {
+	
+	int opcao;
+	int tamanho = 5;
+	
+	string login = "..";
+	string senha = "..";
+		
+	string nome;
+	string email;
+	int idade;
+	char disp;
+	string procura;
+	
+	char variavel_delet = 'X';
+	int variavel_delet2 = 0;
+	
+	string vet_nome[tamanho];
+	string vet_email[tamanho];
+	int vet_idade[tamanho];
+	char vet_disp[tamanho];
+
+	bool enter = false;
+	int erros = 3;
+	
+	while (true) {
+
+	
+	    cout << "-------verificação--------" << endl;
+	    cout << "Digite o email " << endl;
+	    cin >> login;
+	    cout << "Digite a senha " << endl;
+	    cin >> senha;
+	    
+	    if (login == ".." && senha == ".." ) {
+	    	
+	    	enter = true;
+	    	
+	    	cout << "Bem-vindo!!" << endl;
+	    	cout << "-------------------" << endl;
+	    	
+	    	break;
+		} else {
+			
+			erros = erros - 1;
+			cout << "Voce errou, tem apenas " << erros << endl;
+			
+			if (erros == 0) {
+				
+				cout << " " << endl; 
+				cout << "tentativas gastas...voce não é bem vindo" << endl;
+				cout << " " << endl; 
+				
+				break;
+			}
+		}
+	}
+	    
+	while (enter == true) {
+	
+		cout << "1- Cadastrar cliente" << endl;
+	    cout << "2- Alterar cliente" << endl;
+		cout << "3- Listar todos os clientes" << endl;
+		cout << "4- Listar disponiveis" << endl;
+		cout << "5- Remover cliente" << endl;
+		cout << "6- Sair do programa" << endl;
+		cin >> opcao;
+		
+		switch (opcao) {
+			
+			case 1:
+				
+				cout << "Quantas pessoas pretende cadastrar?" << endl;
+				cin >> tamanho;
+				
+				if (tamanho >= 5 || tamanho < 0) {
+					cout << "Número de cadastros invalido" << endl;
+				} else {
+					
+					for (int a = 0; a<tamanho; a++) {
+						
+						cout << "------------cadastro------------" << endl;
+						
+						cout << "Nome:" << endl;
+						cin >> nome;
+					    vet_nome[a] = nome;
+						 
+					    cout << "Email:" << endl;
+						cin >> email;
+					    vet_email[a] = email;
+						 
+					    cout << "Idade:" << endl;
+						cin >> idade;
+						vet_idade[a] = idade;
+					
+					    cout << "Disponibilidade (Digite s ou n):" << endl;
+						cin >> disp;
+					    vet_disp[a] = disp;
+						 
+					  cout << "--------------------------------" << endl;     
+				}
+
+			}
+			
+			cout << " " << endl;
+			
+			break;
+			
+			case 2:
+				
+				cout << "Deseja alterar algum cliente?" << endl;
+				cin >> procura;
+				
+				if (procura == "nao") {
+					
+					cout << "OK! voltando para o menu" << endl;
+					cout << "--------------------------------" << endl;
+					cout << " " << endl;
+					
+				}else{
+						cout << "Que cliente?" << endl;
+						cin >> procura;
+															
+					for (int a=0 ; a<tamanho ; a++) {
+					
+						if (procura == vet_nome[a]) {
+													
+						cout << "Novo nome:" << endl;
+						cin >> nome;
+					    vet_nome[a] = nome; 
+					    
+					    cout << "Novo Email:" << endl;
+						cin >> email;
+					    vet_email[a] = email;
+						 
+					    cout << "Nova idade:" << endl;
+						cin >> idade;
+					    vet_idade[a] = idade;
+						 
+					    cout << "Nova disponibilidade:" << endl;
+						cin >> disp;
+					    vet_disp[a] = disp;
+							
+						}
+					}
+				
+				}
+				        cout << " " << endl;
+		    break;
+		    
+		    case 3:
+		    	
+		    	cout << "LISTANDO TODOS OS CLIENTES" << endl;
+		    	cout << "--------------------------" << endl;
+		    	
+		    	for (int a=0 ; a<tamanho ; a++) {
+		    		
+		    		cout << "-------------------------------" << endl;
+		    		cout << "Nome: " << vet_nome[a] << endl;
+		    		cout << "email: " << vet_email[a] << endl;
+		    		cout << "idade: " << vet_idade[a] << endl;
+		    		cout << "Disponibilidade: " << vet_disp[a] << endl;
+		    		cout << "-------------------------------" << endl;
+				} 
+		        
+		        cout << " " << endl;
+		    
+			break;
+			
+			case 4:
+				
+				cout << "LISTANDO TODOS OS CLIENTES DISPONIVEIS" << endl;
+		    	cout << "--------------------------" << endl;
+							
+				for (int a=0 ; a<tamanho ; a++) {
+					
+					if (vet_disp[a] == 's') {
+						
+					cout << "-------------------------------" << endl;
+		    		cout << "Nome: " << vet_nome[a] << endl;
+		    		cout << "email: " << vet_email[a] << endl;
+		    		cout << "idade: " << vet_idade[a] << endl;
+		    		cout << "-------------------------------" << endl;
+						
+					}
+				}
+			    
+			    cout << "-----------------------------" << endl;
+			
+			break;
+			
+			case 5:
+				
+				cout << "Que cliente deseja remover?" << endl;
+						cin >> procura;
+															
+					for (int a=0 ; a<tamanho ; a++) {
+										
+						if (procura == vet_nome[a]) {
+						
+						cout << "_____REMOVIDO_____" << endl;
+												
+					    vet_nome[a] = variavel_delet; 
+					    vet_email[a] = variavel_delet; 
+					    vet_idade[a] = variavel_delet2; 
+					    vet_disp[a] = variavel_delet;						
+					     
+						} else {
+							cout << "IMPOSSIVEL REMOVER!!! cliente não encontrado" << endl;
+						}
+					}
+					
+					cout << "-----------------------------------" << endl;
+					cout << " " << endl;
+					
+			break;
+			
+			case 6: 
+			
+			cout << "Execução terminada" << endl;
+			return 0;
+								   			    
+		}
+
+	}
+	
+  return 0;
+  
+}

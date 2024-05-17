@@ -1,0 +1,171 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+
+//1. Crie um programa que interface de entrada de login e senha para ter acesso ao programa.
+//2. Crie um menu com as seguintes funções: 1.Somar Numeros, 2.Subtrair Números, 3.Multiplicar Números, 4.Dividir Números 5.Sair do Programa.
+//3. Você deve criar funções que serão chamadas dentro de cada case para realizar as tarefas requeridas.
+
+//PS - Verificar possíveis inconsistências nas operações de divisão e verificar acessos de login (tentativas limitadas).
+
+//-------------------------------------------------------------------------------------------------------------------------
+
+using namespace std;
+
+
+int somar (int x, int y) {
+	
+	return x + y;
+}
+
+int subtracao (int a, int b) {
+	
+	return a - b;
+}
+
+int divisao (int d, int e) {
+	
+	return d / e;
+}
+
+void operacao (int num3) {
+	
+	int num1, num2;
+	int result;
+	
+	num1 = 0;
+	num2 = 0;
+	
+	cout << "Indique o valor do primeiro numero: " << endl;
+	cin >> num1;
+	
+	cout << "Indique o valor do segundo numero: " << endl;
+	cin >> num2;
+	
+	if (num3 == 1) {
+		
+		result = num1 + num2;
+		
+	} else if (num3 == 2) {
+		
+		result = num1 - num2;
+		
+	} else if (num3 == 3) {
+		
+		result = num1 * num2;
+		
+	} else if (num3 == 4) {
+		
+		result = num1 / num2;
+		
+	} else {
+		
+		cout << "Insira uma operacao valida" << endl;
+		
+	}
+	
+	cout << "O resultado da operacao e " << result << endl;
+	
+}
+
+
+int multiplicacao (int f, int g) {
+	
+	return f * g;
+}
+
+
+int main(int argc, char** argv) {
+	
+	string login = "..";
+	string senha = "..";
+	
+	int opcao;
+	int conta = 0;
+	
+	bool enter = false;
+	int erros = 3;
+	
+	while (true) {
+		
+		cout << "-------VERIFICAÇÂO-------" << endl;
+		cout << "Digite o email" << endl;
+		cin >> login;
+		cout << "Digite a senha" << endl;
+		cin >> senha;
+		
+		if (login == ".." && senha == "..") {
+			
+			enter = true;
+			
+			cout << "Bem-vindo!!" << endl;
+			cout << "-------------------------" << endl;
+			
+			break;
+		}   else {
+		        
+				erros = erros-1;
+				cout << " " << endl;
+				cout << "Voce errou tem apenas " << erros << " erros" << endl;
+				cout << " " << endl;
+				
+				if (erros == 0) {
+					
+					cout << " " << endl;
+					cout  << "Tentativas gastas...voce nao é bem vindo" << endl;
+					cout << " " << endl;
+					
+					break;
+				}			
+		}
+	}
+	
+	while (enter == true) {
+		
+		cout << "1- Somar numeros" << endl;
+		cout << "2- Subtrair numeros" << endl;
+		cout << "3- dividir numeros" << endl;
+		cout << "4- multiplicar numeros" << endl;
+		cout << "5- Sair do programa" << endl;
+		cin >> opcao;
+		
+		switch (opcao) {
+			
+			case 1:
+			   
+			   conta = 1;
+			   operacao(conta);
+               
+            break;
+    	
+            case 2:
+            	
+            	conta = 2;
+				operacao(conta);
+               
+			break;
+			
+			case 3:
+				
+				conta = 3;
+				operacao(conta);
+			   
+			break;
+			
+			case 4:
+				
+				conta = 4;
+				operacao(conta);
+		       
+			break;
+			
+			case 5:
+				
+			   cout << "-------------------------" << endl;
+			   cout << "Execução terminada" << endl;
+			   cout << "-------------------------" << endl;
+			   return 0;			         	
+}
+}
+	return 0;
+}

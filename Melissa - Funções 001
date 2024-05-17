@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+
+void inscrever() {              // void = não retorna valor algum, apenas imprime , () = não tem saida e nem entrada
+        cout  << "ata";        //apenas chamar a função "inscrever" e escrevera isso
+		
+		}                     // define = a gente pode manter o valor dentro disso introcavel, ou seja o valor nao muda;
+
+int somar(int x, int y) {  //criando uma função que some dois elementos
+
+	int soma;               // estou a declarar a variavel soma dentro da função, logo é uma variavel local
+	soma = x+y;             //soma vai ser a adição entre os números
+	return soma;            //retornei o resultado  
+} 
+
+int main(int argc, char** argv) {
+	
+                         //funções (ao inves de escrevermos o mesmo codigo varias vezes, podemos chama-lo)
+	inscrever();	
+	
+	int a=5, b=4;    	
+	int s;              // s vai receber o valor da soma
+						//s so funciona dentro do main
+	s = somar(a,b);
+	cout << "soma: " << s << endl;
+    a=30;
+	
+	
+	return 0;
+}

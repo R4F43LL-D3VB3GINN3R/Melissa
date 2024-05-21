@@ -1,0 +1,165 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+
+using namespace std;
+
+bool access() {  //A boolean function to get the access through returned boolean variable...
+	
+	string pass = "namelogin";
+	string login = "111";
+	bool verification = false;
+	
+	cout << "---------Welcome---------" << endl;
+	
+	cout << "Type your login: ";
+	cin >> login;
+	
+	cout << "Type your pass: ";
+	cin >> pass;
+	
+	cout << "-------------------------" << endl;
+	
+	if (login != "namelogin" && pass != "111") {
+		
+		cout << "Wrong pass or login." << endl;
+		cout << "-------------------------" << endl;
+		
+		verification = false;
+		
+	} else {
+		
+		verification = true;
+		
+	}
+	
+	return verification; //boolean variable returned...
+	
+}
+
+void display_menu () {
+	
+	cout << "1.Insert Employee" << endl;
+	cout << "2.Display Employee" << endl;
+	cout << "3.Exit" << endl;
+	
+}
+
+void add_employee (string name_array[], string role_array[], char stats_array[], int& index) {
+	
+	//employees info
+	string name;
+	string role;
+	char status = 'q';
+	
+	cout << "-------------------------" << endl;
+				
+	cout << "Type the employee's name: ";
+	cin.ignore(); 
+	getline(cin, name);
+	
+	name_array[index] = name;
+	
+	cout << "Type the employee's role: ";
+	cin >> role;
+	
+	role_array[index] = role;
+	
+	while ((status != 'y') && (status != 'n')) {
+	
+		cout << "Type the employee's status (y or n): ";
+		cin >> status;
+	
+	}
+	
+	stats_array[index] = status;
+	
+	cout << "-------------------------" << endl;
+	
+	index++;
+	
+}
+
+void display_list(string name_array[], string role_array[], char stats_array[], int index) {
+	
+	for (int i=0; i<index; i++) {
+		
+		if (stats_array[i] == 'y') {
+		
+			cout << "----------------------------" << endl;
+			cout << "Employee's Name: " << name_array[i] << endl;
+			cout << "Employee's Role: " << role_array[i] << endl;
+			cout << "----------------------------" << endl;
+		
+		}
+		
+	}
+	
+}
+  
+using namespace std;
+
+int main(int argc, char** argv) {
+	
+	//----------------------------------------------------------
+	
+	//verification boolean access
+	bool verification_access = false;
+	verification_access = access();
+	
+	//point cursor menu
+	int cursormenu = 0;
+	
+	//arrays info
+	const int maxsize = 100;    //array size
+	int position_index = 0;     //array index position
+	string array_name[maxsize];
+	string array_role[maxsize];
+	char array_status[maxsize];
+	
+	//------------------------------------------------------------
+
+	while (verification_access) {
+		
+		display_menu();
+		cout << "Option: ";
+		cin >> cursormenu;
+	
+		switch (cursormenu) {
+			
+			case 1:
+				
+				add_employee(array_name, array_role, array_status, position_index);
+				
+				break;
+				
+			case 2:
+				
+				display_list(array_name, array_role, array_status, position_index);
+						
+				break;
+				
+			case 3:
+				
+				cout << "Program has been finished" << endl;
+				return 0;
+				
+				break;
+				
+			default:
+				
+				cout << "----------------------------" << endl;
+				cout << "---Insert a valid option.---" << endl;
+				cout << "----------------------------" << endl;
+				
+				break;
+			
+		}
+		
+	}
+
+	//------------------------------------------------------------
+
+	return 0;
+
+}

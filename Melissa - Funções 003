@@ -1,0 +1,161 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+
+//Escreva um programa que contém um menu com as opções 1.Cadastrar Funcionário, 2.Exibir Funcionário, 3.Sair.
+//Funcionário deve ter Nome, Cargo, Salário
+//Crie uma função para cada opção do Menu.
+
+
+using namespace std;
+
+bool acesso () {
+	
+	string pass = "..";
+	string senha = "..";
+	int misses = 3;
+	bool ver = false;
+	
+	while (!ver) {
+	
+	cout << "--------------------------" << endl;
+	
+	cout << "Escreva seu email" << endl;
+	cin >> pass;
+	
+	cout << "--------------------------" << endl;
+	
+	cout << "Escreva sua senha" << endl;
+	cin >> senha;
+	
+	if (pass == ".." && senha == "..") {
+		
+		cout << "Bem- vindo!!" << endl;
+		cout << "--------------------------" << endl;
+		
+		ver = true;
+				
+	} else {
+		
+		misses = misses - 1;
+		cout << "Vôce tem " << misses << " Erros" << endl;
+		
+		if (misses = 0) {
+			
+			cout << "Vôce não é bem-vindo" << endl;
+			return 0;
+			
+		}
+		
+	}
+	
+  }
+       return ver;
+}
+
+
+void menu () {
+	
+	cout << "--------------------------" << endl;
+	cout << "1- Cadastrar funcionario" << endl;
+	cout << "2- Exibir funcionario" << endl;
+	cout << "3- Sair" << endl;
+	cout << "--------------------------" << endl;
+	
+	
+}
+
+void cadastro (string nome[], string cargo[], float salario[], int& index) {
+	
+	string var_nome;
+	string var_cargo;
+	int var_salr;
+	
+	cout << "--------------------------" << endl;
+	
+	cout << "Digite seu nome" << endl;
+	cin >> var_nome;
+	
+	nome[index] = var_nome;
+	
+	cout << "Digite seu cargo" << endl;
+	cin >> var_cargo;
+	
+	cargo[index] = var_cargo;
+	
+	cout << "Digite seu salario" << endl;
+    cin >> var_salr;
+    
+    cout << "--------------------------" << endl;
+    
+    salario[index] = var_salr;
+	
+	index++;
+	
+}
+
+
+void listar (string nome[], string cargo[], float salario[], int& index) {
+	
+	for (int i=0 ; i<index ; i++) {
+		
+		cout << "--------------------------" << endl;
+		cout << "Nome: " << nome[i] << endl;
+		cout << "cargo: " << cargo[i] << endl;
+		cout << "Salario: " << salario[i] << endl;
+		cout << "--------------------------" << endl;
+				
+	}
+	
+	
+}
+
+
+int main(int argc, char** argv) {
+	
+	bool vrf = false;
+	vrf = acesso();
+	
+	int cursor = 0;
+	
+	const int max = 5;
+	int index = 0;
+	string nome[max];
+	string cargo[max];
+	float salario[max];
+	
+	string cadastro1;
+	string listar1;
+	
+	while (vrf) {
+		
+		menu ();
+		cin >> cursor;
+		
+		switch (cursor) {
+			
+			case 1:
+						
+				cadastro (nome, cargo, salario, index);
+			
+			break;
+			
+			case 2:
+				
+				listar (nome, cargo, salario, index);
+				
+			break;
+			
+			case 3:
+				
+				cout << "Execução terminada" << endl;				
+				return 0;
+				
+		}
+		
+		
+	}
+	
+	
+	return 0;
+}

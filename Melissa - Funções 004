@@ -1,0 +1,194 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+
+//Crie um programa que contenha um menu com as opções: 1.Cadastrar Livro, 2.Listar Livro, 3.Pesquisar Livro, 4.Encerrar o Programa.
+//O Livro deve conter Título, Autor, Páginas.
+
+using namespace std;
+
+bool acesso () {
+	
+	string pass = "..";
+	string senha = "..";
+	int erros = 3;
+	bool vrf = false;
+	
+	while (!vrf) {
+		
+		cout << "----------------------------" << endl;
+		
+	    cout <<	"Escreva seu email" << endl;
+	    cin >> pass;
+	
+		cout << "----------------------------" << endl;
+		
+		cout << "Escreva sua senha" << endl;
+		cin >> senha;
+		
+		cout << "----------------------------" << endl;
+		
+		if (pass == ".." && senha == "..") {
+			
+			cout << "Bem-vindo!!" << endl;
+			
+			cout << "----------------------------" << endl;
+			
+			vrf = true;
+			
+		}else {
+			
+			erros = erros - 1;
+			cout << "Vôce tem " << erros << " erros";
+			
+			
+			if (erros == 0
+			) {
+				
+				cout << "Vôce não é Bem-vindo!" << endl;
+				return 0;
+				
+			}
+			
+		}
+		
+	}
+		
+}
+
+void menu () {
+	
+	cout << "----------------------------" << endl;
+	cout << "1- Cadastrar livro" << endl;
+	cout << "2- Listar livros" << endl;
+	cout << "3- Pesquisar livros" << endl;
+	cout << "4- Sair do programa" << endl;
+	cout << "----------------------------" << endl;	
+	
+}
+
+void cadastro (string nome[], string autor[], int paginas[], int& index) {
+	
+	string var_nome;
+	string var_autor;
+	int pag;
+	
+	cout << "----------------------------" << endl;
+	cout << "Digite o nome do livro" << endl;
+	cin >> var_nome;
+	
+	nome[index] = var_nome;
+	
+	cout << "Digite o nome do autor" << endl;
+	cin >> var_autor;
+	
+	autor[index] = var_autor;
+	
+	cout << "Digite quantas paginas" << endl;
+	cin >> pag;
+	
+	paginas[index] = pag;
+	
+	cout << "----------------------------" << endl;
+	
+	index++;
+	
+}
+
+void listar (string nome[], string autor[], int paginas[], int& index) {
+	
+	for (int i=0 ; i<index ; i++) {
+		
+		cout << "----------------------------" << endl;
+		cout << "nome: " << nome[i] << endl;
+		cout << "autor: " << autor[i] << endl;
+		cout << "paginas: " << paginas[i] << endl;
+		cout << "----------------------------" << endl;
+			
+	}
+	
+}
+
+void pesquisar  (string nome[], string autor[], int paginas[], int& index) {
+	
+	string pesquisa;
+	
+	for (int i=0 ; i<index ; i++) {
+		
+	cout << "----------------------------" << endl;
+	cout << "Digite o nome do livro que deseja pesquisar:";
+	cin >> pesquisa;
+	
+	if (pesquisa == nome[i]) {
+		
+		cout << "----------------------------" << endl;
+		cout << "nome: " << nome[i] << endl;
+		cout << "autor: " << autor[i] << endl;
+		cout << "paginas: " << paginas[i] << endl;
+		cout << "----------------------------" << endl;
+		
+       }   
+  }
+	
+	
+	
+}
+
+
+
+int main(int argc, char** argv) {
+
+bool vrff = false;
+
+vrff = acesso();
+
+int cursor = 0;
+const int max = 5;
+int index = 0;
+string nome[max];
+string autor[max];
+int paginas[max];
+
+
+while (vrff) {
+	
+	menu();
+	cin >> cursor;
+	
+	switch (cursor) {
+		
+		case 1:
+			
+			cadastro (nome, autor, paginas, index);
+			
+			
+		break;
+		
+		
+		case 2:
+			
+			listar (nome, autor, paginas, index);
+			
+		break;
+		
+		case 3:
+		
+			pesquisar (nome, autor, paginas, index);
+			
+		break;
+		
+		case 4:
+		
+			cout << "Programa encerrado" << endl;
+			
+			return 0;
+		
+				
+	}
+	
+	
+	
+	
+}	
+	return 0;
+}

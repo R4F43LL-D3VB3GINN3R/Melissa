@@ -47,3 +47,255 @@ Junção de dois vetores:
 Crie dois vetores de inteiros.
 Crie um terceiro vetor que seja a junção dos dois primeiros.
 Exiba o vetor resultante.
+
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <vector>
+
+using namespace std;
+
+int main(int argc, char** argv) {
+
+// 1)
+
+//int vet[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+//for (int i=0; i<10; i++) {
+
+//cout << vet[i] << endl;
+
+//}
+
+//-----------------------------------------------
+
+//2)
+
+//int tamanho = 0;
+//int vet[tamanho];
+//int soma = 0;
+//int media = 0;
+
+//cout << "Quantos elementos deseja pro vetor?" << endl;
+//cin >> tamanho;
+
+//for (int i=0; i<tamanho; i++) {
+	
+//	cout << "elemento " << i+1 << " do vetor:" << endl;
+//	cin >> vet[i];
+	
+//	soma = soma + vet[i];
+//	media = soma / tamanho;
+	
+//	cout << " " << endl;
+//	cout << "a media desses elementos é: " << media << endl;
+//	cout << " " << endl;
+	
+    
+//}
+
+//-----------------------------------------------
+
+//3)
+
+//int vet[] = {2, 2, 2, 2, 2, 2, 2, 2, 2, 2};
+//int soma = 0;
+//float media = 10;
+
+//for (int i=0 ; i<10 ; i++) {
+	
+//	soma += vet[i];
+//	media = soma / media;
+	
+//}
+
+//cout << "soma: " << soma << endl;
+//cout << "media: " << media << endl;
+
+//-----------------------------------------------
+
+//4)
+
+//int tamanho = 7;
+//int vet[tamanho];
+//int maior;
+//int menor;
+
+//for (int i = 0; i<tamanho; i++) {
+	
+//	cout << "Digite o " << i+1 << " elemento:";
+//	cin >> vet[i];
+	
+//	if (i == 0) {
+		
+//		maior = menor = vet[i];
+		
+//	}else {
+		
+//		if (vet[i] > maior) {
+			
+//			maior = vet[i];
+			
+//		}
+		
+//		if (vet[i] < menor) {
+			
+//			menor = vet[i];
+			
+//		}
+		
+//	}
+	
+//}
+
+//cout << " " << endl;
+//cout << "Menor: " << menor << endl;
+//cout << "Maior: " << maior << endl;
+
+//---------------------------------------------
+
+//5)
+
+//int vet[5];
+//int soma;
+//int elemento;
+//
+//cout << "Digite seu elemento escolhido " << endl;
+//cin >> elemento;
+//
+//for (int i=0 ; i<5; i++) {
+//
+//	cout << " " << endl;
+//	cout << "Digite o " << i+1 << " elemento:";
+//	cin >> vet[i];
+//	cout << " " << endl;
+//	
+//	if (vet[i] == elemento) {
+//		
+//		soma = soma + 1;
+//		
+//	}
+//}
+//
+//cout << " " << endl;
+//cout << "Foram repetidas " << soma << " vezes" << endl;
+
+//----------------------------------------------
+
+//6)
+
+//int vet[5] = {3, 5, 7, 4, 9};
+//int aux = 0;
+//
+//
+//for (int i=0; i<5; i++) {
+//
+//
+//	for (int a = i + 1; a<=4; a++) {
+//		
+//		if (vet[i] > vet[a]) {
+//		       
+//		aux = vet[i];
+//		vet[i] = vet[a];
+//		vet[a] = aux;
+//		
+//		}		
+//	}
+//}
+//
+//for (int b=0; b<5; b++) {
+//	
+//	cout << vet[b] << endl;
+//	
+//}
+
+//---------------------------------------
+
+//7)
+
+//int a[5] = {1, 2, 3, 4, 5};
+//int b[5];
+//
+//for (int i=0, j=4; i<5; i++, j--) {
+//	
+//	b[j] = a[i];
+//	
+//}
+//
+//for (int i=0; i<5; i++) {
+//	
+//	cout << b[i];
+//	
+//}
+
+//---------------------------------------
+
+//8)
+
+//int vet[5] = {1, 2, 3, 4 ,5};
+//int vetb[5];
+//
+//for (int i=0; i<5; i++) {
+//	
+//	vetb[i] = vet[i];
+//
+//}
+//
+//for (int a=0; a<5; a++) {
+//	
+//	cout << vetb[a] << endl;
+//	
+//}
+
+//---------------------------------------
+
+//9)
+
+//int tamanho = 5;
+//    int vet[tamanho] = {1, 2, 3, 4, 5};
+//    int vet2[tamanho];
+//    int value = 0;
+//
+//    cout << "Choose a value to remove: ";
+//    cin >> value;
+//
+//    int newSize = 0;
+//
+//    for (int i = 0; i < tamanho; i++) {
+//        if (vet[i] != value) {
+//            vet2[newSize] = vet[i];
+//            newSize++;
+//        }
+//    }
+//
+//    cout << "Array after removal: ";
+//    for (int i = 0; i < newSize; i++) {
+//        cout << vet2[i] << " ";
+//    }
+//    cout << endl;
+
+//---------------------------------------
+
+//10)
+
+//int veta[3] = {1,2,3};
+//
+//int vetb[3] = {2,3,4};
+//
+//int vetc[3];
+//
+//for (int i=0; i<3; i++) {
+//	
+//	vetc[i] = veta[i] + vetb[i];
+//	
+//}
+//
+//for (int a=0; a<3; a++) {
+//	
+//	cout << vetc[a] << endl;
+//	
+//}
+//
+
+	return 0;
+}

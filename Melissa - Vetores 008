@@ -1,0 +1,49 @@
+Criação de um vetor e inicialização com valores padrão:
+
+Crie um vetor de inteiros com 10 elementos e inicialize todos os elementos com zero.
+Exiba os valores do vetor.
+Preenchimento de um vetor com valores do usuário:
+
+Crie um vetor de n elementos (onde n é fornecido pelo usuário).
+Preencha o vetor com valores fornecidos pelo usuário.
+Exiba os valores do vetor.
+Cálculo da soma e média dos elementos de um vetor:
+
+Crie um vetor de inteiros.
+Calcule e exiba a soma de todos os elementos do vetor.
+Calcule e exiba a média dos elementos do vetor.
+Encontrar o maior e o menor valor em um vetor:
+
+Crie um vetor de inteiros.
+Encontre e exiba o maior e o menor valor presente no vetor.
+Contagem de ocorrências de um valor específico:
+
+Crie um vetor de inteiros.
+Solicite ao usuário um valor específico.
+Conte e exiba quantas vezes esse valor aparece no vetor.
+Ordenação de um vetor:
+
+Crie um vetor de inteiros.
+Ordene o vetor em ordem crescente usando o algoritmo de sua escolha (por exemplo, bubble sort).
+Exiba o vetor ordenado.
+Inversão dos elementos de um vetor:
+
+Crie um vetor de inteiros.
+Inverta os elementos do vetor (o primeiro elemento se torna o último, o segundo se torna o penúltimo, etc.).
+Exiba o vetor invertido.
+Cópia de um vetor:
+
+Crie um vetor de inteiros e preencha-o com valores.
+Crie um segundo vetor que seja uma cópia do primeiro.
+Exiba os elementos do segundo vetor.
+Remoção de um elemento específico:
+
+Crie um vetor de inteiros.
+Solicite ao usuário um valor específico.
+Remova a primeira ocorrência desse valor do vetor e ajuste o tamanho do vetor.
+Exiba o vetor resultante.
+Junção de dois vetores:
+
+Crie dois vetores de inteiros.
+Crie um terceiro vetor que seja a junção dos dois primeiros.
+Exiba o vetor resultante.

@@ -1,0 +1,111 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <vector>
+#define MAX 10
+
+//Crie um programa que tenha 3 users cadastrados.
+//Para cada user, existe o login, senha e lvl_access
+//Tela de Verificacao de Login e Senha
+//Criando uma funcao que retorna o lvl_access do user
+//Se nivel de acesso S, redirecionado para menu de admin
+//Entre A, B e C para main menu
+//D, não tem acesso
+//Além de D, preencha novamente.
+
+
+using namespace std;
+
+string login[MAX] = {"..", "...", ".", "...."};
+string senha[MAX] = {"..", "...", ".", "...."};
+char lvl[MAX] = {'S', 'A', 'C', 'D'};
+
+string var_login;
+string var_senha;
+char var_nivel;
+
+char acess () {
+	
+	int erro = 3;
+	
+	bool vrf = false;
+	
+	while (!vrf) {
+		
+		cout << "----------------------------" << endl;
+		
+		cout << "Escreva seu login" << endl;
+		cin >> var_login;
+		
+		cout << "Escreva sua senha" << endl;
+		cin >> var_senha;
+		
+		cout << "----------------------------" << endl;
+		
+		for (int i=0; i<4; i++) {
+			
+		if (var_login == login[i] && var_senha == senha[i]) {
+			
+			cout << "----------------------------" << endl;
+			
+			var_nivel = lvl[i];
+			
+			vrf=true;
+			
+		} 
+		
+	    }
+	    
+	    if (!vrf) {
+	    	
+	    	cout << "----------------------------" << endl;
+			erro = erro - 1;
+			
+			cout << "Você tem " << erro << " erros" << endl;
+			
+			if (erro == 0) {
+				
+				cout << "Você não é bem-vindo" << endl;
+				return 0;
+				
+			}
+		
+		}
+	    
+	}
+	
+	return var_nivel;
+		
+}
+
+int main(int argc, char** argv) {
+
+char vrff;
+
+int cursor;
+vrff = acess();
+	
+	
+	while (vrff == 'S') {
+			
+		cout << "Encaminhando para o menu admin" << endl;
+		cout << "Bem-vindo" << endl;
+		cin >> cursor;
+		
+   }
+
+	while (vrff == 'A' || vrff == 'C' || vrff == 'B')	{
+		
+		cout << "Encaminhando para o menu principal" << endl;
+		cout << "Bem-vindo" << endl;
+		cin >> cursor;	
+    }
+	
+	if (vrff == 'D') {
+
+		cout << "Você não tem autorização para entrar" << endl;
+		return 0;
+    }
+    
+	return 0;
+}

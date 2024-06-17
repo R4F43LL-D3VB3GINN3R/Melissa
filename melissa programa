@@ -4,26 +4,38 @@
 #include <vector>
 #define MAX 10
 
-//Crie um programa que tenha 3 users cadastrados.
-//Para cada user, existe o login, senha e lvl_access
-//Tela de Verificacao de Login e Senha
-//Criando uma funcao que retorna o lvl_access do user
-//Se nivel de acesso S, redirecionado para menu de admin
-//Entre A, B e C para main menu
-//D, não tem acesso
-//Além de D, preencha novamente.
-
-
 using namespace std;
 
+//_________________VETORES
 string login[MAX] = {"..", "...", ".", "...."};
 string senha[MAX] = {"..", "...", ".", "...."};
 char lvl[MAX] = {'S', 'A', 'C', 'D'};
 
+//____________VARIAVEL
 string var_login;
 string var_senha;
 char var_nivel;
 
+//_______INDEX________
+int lv_count = 0;
+
+//__________________________FUNÇÃO PARA ADICIONAR NO VETOR__________
+int count_elm () {
+	
+	for (int i=0; i<MAX; i++) {
+		
+		if (login[i] != "") {
+			
+			lv_count++;
+			
+		}
+		
+	}
+	return lv_count;
+	
+}
+
+//________________________________________________________________
 char acess () {
 	
 	int erro = 3;
@@ -32,22 +44,23 @@ char acess () {
 	
 	while (!vrf) {
 		
-		cout << "----------------------------" << endl;
-		
+		// _______________ENTRADA_______________
+		cout << " " << endl;
 		cout << "Escreva seu login" << endl;
 		cin >> var_login;
 		
 		cout << "Escreva sua senha" << endl;
 		cin >> var_senha;
 		
-		cout << "----------------------------" << endl;
+		//__________ADICIONAR MAIS UM ESPAÇO NO VETOR
+	    count_elm();
 		
-		for (int i=0; i<4; i++) {
+		
+		//_______________________VERIFICAÇÂO_________			
+		for (int i=0; i<=lv_count + 1; i++) {
 			
 		if (var_login == login[i] && var_senha == senha[i]) {
-			
-			cout << "----------------------------" << endl;
-			
+						
 			var_nivel = lvl[i];
 			
 			vrf=true;
@@ -56,9 +69,10 @@ char acess () {
 		
 	    }
 	    
+	    //______________________ERROS__________
 	    if (!vrf) {
 	    	
-	    	cout << "----------------------------" << endl;
+	    
 			erro = erro - 1;
 			
 			cout << "Você tem " << erro << " erros" << endl;
@@ -71,29 +85,94 @@ char acess () {
 			}
 		
 		}
-	    
+		  
+		  
+        // REDEFINIR A VARIAVEL__________
+	    lv_count = 0;
+	    	
 	}
 	
+	//__________RETORNAR A VARIAVEL QUE GUARDA O NIVEL PARA A VERIFICAÇÃO_______
 	return var_nivel;
 		
 }
 
+//______________________________MENU______________________
+void menu_admin () {
+		
+    cout << "1- Cadastrar admin" << endl;
+    cout << "2- Sair do progama" << endl;
+
+}
+
+//_______________________________CADASTRAR_________________
+string cadastro () {
+	
+	cout << "Qual o nivel?" << endl;
+	cin >> var_nivel;
+	
+	cout << "Qual senha?" << endl;
+	cin >> var_senha;
+	
+	cout << "Qual o login?" << endl;
+	cin >> var_login;
+	
+	//_________________ADICIONAR O ELEMENTO NO VETOR
+	count_elm();
+	
+	       //!! ATENÇÃO AO IMPLEMENTAR OS ESPAÇOS____________
+	login[lv_count] = var_login; 
+		
+	senha[lv_count] = var_senha;
+	
+    lvl[lv_count] = var_nivel;
+    
+    //REDEFINIR__________
+	lv_count = 0;
+	
+	//_______RETORNAR!!!!!
+    return var_login;
+}
+
+//----------------------PRINCIPAL____________________________
 int main(int argc, char** argv) {
 
 char vrff;
 
 int cursor;
+
 vrff = acess();
 	
-	
+	//Menu Admin_______________________________
 	while (vrff == 'S') {
-			
-		cout << "Encaminhando para o menu admin" << endl;
-		cout << "Bem-vindo" << endl;
+		
+		//FUNCAO DO MENU_______
+		menu_admin();
 		cin >> cursor;
+		cout << " " << endl;
+		
+		//MENU COM AS FUNÇOES COMEÇA AQUI!!!!!!____________________
+		switch (cursor) {
+			
+			case 1:
+				
+				cadastro();
+			 	vrff = acess();
+				 	    
+			break;
+			
+			//____________ENCERRAR
+			case 2:
+				
+				cout << "Programa encerrado" << endl;
+				return 0;
+		}
 		
    }
-
+	
+	//_____________________________________________________
+	
+	//Menu User
 	while (vrff == 'A' || vrff == 'C' || vrff == 'B')	{
 		
 		cout << "Encaminhando para o menu principal" << endl;
@@ -101,6 +180,9 @@ vrff = acess();
 		cin >> cursor;	
     }
 	
+	//____________________________________________________
+	
+	//Ex-Admins Acesso
 	if (vrff == 'D') {
 
 		cout << "Você não tem autorização para entrar" << endl;

@@ -10,11 +10,14 @@ using namespace std;
 string login[MAX] = {"..", "...", ".", "...."};
 string senha[MAX] = {"..", "...", ".", "...."};
 char lvl[MAX] = {'S', 'A', 'C', 'D'};
+string nome[MAX] = {"mel", "Joana", "ceci", "gi"};
+string procura;
 
 //____________VARIAVEL
 string var_login;
 string var_senha;
 char var_nivel;
+string var_nome;
 
 //_______INDEX________
 int lv_count = 0;
@@ -101,8 +104,9 @@ char acess () {
 void menu_admin () {
 		
     cout << "1- Cadastrar admin" << endl;
-    cout << "2- Sair do progama" << endl;
-
+    cout << "2- Listar cadastros" << endl;
+    cout << "3- Editar" << endl;
+    cout << "4- Sair" << endl;
 }
 
 //_______________________________CADASTRAR_________________
@@ -117,6 +121,9 @@ string cadastro () {
 	cout << "Qual o login?" << endl;
 	cin >> var_login;
 	
+	cout << "Qual o nome?" << endl;
+	cin >> var_nome;
+	
 	//_________________ADICIONAR O ELEMENTO NO VETOR
 	count_elm();
 	
@@ -127,12 +134,94 @@ string cadastro () {
 	
     lvl[lv_count] = var_nivel;
     
+    nome[lv_count] = var_nome;
+    
     //REDEFINIR__________
 	lv_count = 0;
 	
 	//_______RETORNAR!!!!!
     return var_login;
 }
+
+
+//LISTAR_____________________
+void listar () {
+	
+	cout << "---------------LISTANDO-----------------" << endl;
+	
+	//CHAMAR A FUNÇAO
+	count_elm ();
+	
+	for (int i=0; i<lv_count; i++) {
+				
+		cout << "----------------------------------" << endl;
+		
+		cout << "Nome: " << nome[i] << endl;
+		cout << "Nivel: " << lvl[i] << endl;
+		cout << "Senha: " << senha[i] << endl;
+		cout << "login: " << login[i] << endl;
+		cout << " " << endl;
+		
+	}
+	
+	//REDEFINIR SE NAO DA ERRO
+	lv_count = 0;
+}
+
+string alterar () {
+	
+	cout << "Deseja alterar algum cliente?" << endl;
+	cin >> procura;
+	
+	if (procura != "sim") {
+		
+		cout << "OK! voltando para o menu" << endl;
+		cout << "------------------------" << endl;
+		cout << " " << endl;
+		
+	}else {
+		
+		// CHAMANDO A FUNCAO PARA O VETOR
+		count_elm ();
+		
+		cout << "Quem?" << endl;
+		cin >> procura;
+		
+		// EDITANDO______________________
+		for (int a=0; a<lv_count; a++) {
+			
+			if (procura == nome[a]) {
+				
+				cout << "Novo nome: ";
+				cin >> var_nome;
+				nome[a] = var_nome;
+				
+				cout << "Novo nivel: ";
+				cin >> var_nivel;
+				lvl[a] = var_nivel;
+				
+				cout << "Nova senha: ";
+				cin >> var_senha;
+				senha[a] = var_senha;
+				
+				cout << "Novo login: ";
+				cin >> var_login;
+				login[a] = var_login;
+				
+			}
+			
+			
+		}
+		
+	}
+	
+	// REDEFINIR____________________________
+	lv_count = 0;
+	
+	return var_login;
+	
+}
+
 
 //----------------------PRINCIPAL____________________________
 int main(int argc, char** argv) {
@@ -157,15 +246,24 @@ vrff = acess();
 			case 1:
 				
 				cadastro();
-			 	vrff = acess();
-				 	    
+			 					 	    
 			break;
 			
-			//____________ENCERRAR
 			case 2:
 				
-				cout << "Programa encerrado" << endl;
-				return 0;
+				listar ();
+				
+			break;
+			
+			case 3:
+				
+				alterar ();
+				
+			break;
+			
+			case 4:
+			
+				return 0;			
 		}
 		
    }

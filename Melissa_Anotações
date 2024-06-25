@@ -1,0 +1,36 @@
+01 - Validação de Variáveis.
+"---------------------------------------------------------------------------------
+
+//VERIFICAÇAO DA VARIAVEL________________
+
+//void int_value (int &var, string str) {
+	
+	//bool valid = false;
+	// while (!valid) {
+		
+	//	cout << str;
+	//	cin >> var;
+    //	->	//FALHAS-----
+	//  -	if (cin.fail()) {
+	//	-	
+	//	-	cout << "entrada invalida" << endl;
+	//	-	//LIMPAR OS EERROS---
+	//	---> cin.clear();
+			//MAXIMO-----
+	//		cin.ignore(INT_MAX);
+			
+	//	}else {
+			
+	//		valid = true;
+			
+	//	}
+		
+//	}
+	
+//}
+
+//________________________________________________________________
+
+//TENTATIVA ____________________________
+
+"---------------------------------------------------------------------------------

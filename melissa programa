@@ -3,69 +3,99 @@
 #include <cstring>
 #include <vector>
 #define MAX 10
+#include <stdio.h>
+#include <conio.h>
+#include <cctype>
+#include <typeinfo>
+#include <fstream>
+#include <locale>
 
 using namespace std;
 
-//_________________VETORES
+//Variáveis, Vetores e Contadores Globais
+//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------
+
+//Admin
+//------------------------------------------------
+string nome[MAX] = {"mel", "Joana", "ceci", "gi"};
 string login[MAX] = {"..", "...", ".", "...."};
 string senha[MAX] = {"..", "...", ".", "...."};
 char lvl[MAX] = {'S', 'A', 'C', 'D'};
-string nome[MAX] = {"mel", "Joana", "ceci", "gi"};
-string procura;
-// ALUNOS_________________________________________
-string alunos[MAX] = {"Sammy", "claire"};
-char lvl_alunos[MAX] = {'C', 'A'};
-string var_alunos;
-char var_nivel_alunos;
-string turmas[MAX] = {"Sexto_B", "Setimo_D"};
-string var_turmas;
-
-//____________VARIAVEL
+//--
+string var_nome;
 string var_login;
 string var_senha;
-char var_nivel;
-string var_nome;
+int var_nivel;
+//------------------------------------------------
 
-//_______INDEX________
+//Aluno
+//------------------------------------------------
+string alunos[MAX] = {"claire"};
+char lvl_alunos[MAX] = {'C'};
+string turmas[MAX] = {"Sexto_B"};
+//--
+string var_alunos;
+char var_nivel_alunos;
+string var_turmas;
+//------------------------------------------------
+
+//Variáveis
+//------------------------------------------------
+string procura;
+int cursor; 
 int lv_count = 0;
 int lv_count_alunos = 0;
 
-//__________________________FUNÇÃO PARA ADICIONAR NO VETOR__________
-int count_elm () {
-	
-	for (int i=0; i<MAX; i++) {
-		
+//FICHEIROS
+ofstream ficheiro_admin;
+
+ofstream ficheiro_senha;
+
+ofstream ficheiro_nivel;
+
+//--------------------------------------------
+
+ofstream ficheiro_alunos;
+
+ofstream ficheiro_turmas;
+
+ofstream ficheiro_lvl_alns;
+
+//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------
+
+bool isInteger(const int& cursor) {
+    for (char c; c = ' '; c++) {
+        if (!isdigit(c)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+int count_elm () {	//Funcao para contar elementos de um vetor.
+	for (int i=0; i<MAX; i++) {		
 		if (login[i] != "") {
-			
-			lv_count++;
-			
-		}
-		
+			lv_count++;	
+		}	
 	}
-	return lv_count;
-	
+	return lv_count;	
 }
 
-// ALUNOS______________________________________
-int count_elm_alunos () {
-	
-		for (int i=0; i<MAX; i++) {
-		
-		if (alunos[i] != "") {
-			
-			lv_count_alunos++;
-			
-		}
-		
-	}
-	
-	return lv_count_alunos;
-	
-	
+int count_elm_alunos () { //Funcao para contar elementos de um vetor.alunos
+	for (int i=0; i<MAX; i++) {		
+		if (alunos[i] != "") {			
+			lv_count_alunos++;	
+		}				
+	}	
+	return lv_count_alunos;		
 }
 
-//________________________________________________________________
-char acess () {
+char acess () { //Funcao para logar no sistema como um admin
 	
 	int erro = 3;
 	
@@ -74,11 +104,10 @@ char acess () {
 	while (!vrf) {
 		
 		// _______________ENTRADA_______________
-		cout << " " << endl;
-		cout << "Escreva seu login" << endl;
+		cout << "~~~~~~~~~~Login Screen~~~~~~~~~~" << endl;
+		cout << "Login: ";
 		cin >> var_login;
-		
-		cout << "Escreva sua senha" << endl;
+		cout << "Senha: ";
 		cin >> var_senha;
 		
 		//__________ADICIONAR MAIS UM ESPAÇO NO VETOR
@@ -88,13 +117,13 @@ char acess () {
 		//_______________________VERIFICAÇÂO_________			
 		for (int i=0; i<=lv_count + 1; i++) {
 			
-		if (var_login == login[i] && var_senha == senha[i]) {
-						
-			var_nivel = lvl[i];
-			
-			vrf=true;
-			
-		} 
+			if (var_login == login[i] && var_senha == senha[i]) {
+							
+				var_nivel = lvl[i];
+				
+				vrf=true;
+				
+			} 
 		
 	    }
 	    
@@ -104,128 +133,256 @@ char acess () {
 	    
 			erro = erro - 1;
 			
-			cout << "Você tem " << erro << " erros" << endl;
+			cout << "-------------------------------------" << endl;
+			cout << "Falha na Autenticação - Tentativas: " << erro << endl;
 			
 			if (erro == 0) {
 				
-				cout << "Você não é bem-vindo" << endl;
+				cout << " " << endl;
+				cout << "------------------------" << endl;
+				cout << "Limite de tentativas chegou ao Limite." << endl;
+				cout << "Programa Encerrado - Contate a Administração para mais Informações." << endl;
+				cout << "------------------------" << endl;
 				return 0;
 				
 			}
 		
 		}
-		  
-		  
+		
+		cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+		cout << "." << endl;
+		cout << ".." << endl;
+		cout << "..." << endl;
+		cout << "..." << endl;
+		cout << ".." << endl;
+		cout << "." << endl;
+		  	  
         // REDEFINIR A VARIAVEL__________
-	    lv_count = 0;
+	    lv_count = 0;  
+}
 	    	
-	}
+
 	
 	//__________RETORNAR A VARIAVEL QUE GUARDA O NIVEL PARA A VERIFICAÇÃO_______
 	return var_nivel;
-		
+	
 }
 
-//______________________________MENU______________________
-void menu_admin () {
+void menu_admin () { //Funcao para dar display no menu
+	
+	cout << "-----------MENU ADMIN------------" << endl;
+	cout << " " << endl;
 		
-    cout << "1- Cadastrar admin" << endl;
-    cout << "2- Listar todos" << endl;
-    cout << "3- Editar" << endl;
-    cout << "4- Deletar" << endl;
-    cout << "5- Sair" << endl;
+    cout << "1 - Cadastrar" << endl;
+    cout << "2 - Listar" << endl;
+    cout << "3 - Editar" << endl;
+    cout << "4 - Deletar" << endl;
+    cout << "5 - Sair" << endl;
+    cout << "Opcao: ";
+    
 }
 
-//_______________________________CADASTRAR_________________
-string cadastro () {
+void cadastro () { //Funcao para cadastro de admins
 	
-	cout << "Qual o nivel?" << endl;
-	cin >> var_nivel;
+	//ficheiros abertos-----------------------------------
+	ficheiro_nivel.open("niveis_adm.txt");
+	ficheiro_admin.open("admin.txt"); 
+	ficheiro_senha.open("senhas_adm.txt");
 	
+	int tamanho = 0;
+	char lvl_choice;
+	bool validation = false;
+		
+	count_elm(); //Conta os elementos atuais do vetor
+	
+	cout << "-------CADASTRO--------" << endl;
+	cout << " " << endl;
+	
+	while (!validation) {
+		
+		cout << "Qual o nivel?" << endl;
+		cout << "1. Nivel S -> Master User" << endl;
+		cout << "2. Nivel A -> Super User" << endl;
+		cout << "3. Nivel B -> Common User" << endl;
+		cout << "4. Nivel C -> Low User" << endl;
+		cout << "Opcao: ";
+		cin >> var_nivel;
+	    
+	    
+	
+		switch (var_nivel) {
+			
+			case 1:
+				
+				lvl_choice = 'S';
+				lvl[lv_count] = lvl_choice;
+				validation = true;
+				break;
+			
+			case 2:
+				
+				lvl_choice = 'A';
+				lvl[lv_count] = lvl_choice;
+				validation = true;
+				break;
+				
+			case 3:
+				
+				lvl_choice = 'B';
+				lvl[lv_count] = lvl_choice;
+				validation = true;
+				break;
+				
+			case 4:
+				
+				lvl_choice = 'C';
+				lvl[lv_count] = lvl_choice;
+				validation = true;
+				break;
+				
+			default:
+				
+				cout << "-----------------------------------" << endl;
+				cout << "Opcao Invalida - Preencha Novamente" << endl;
+				cout << "-----------------------------------" << endl;
+    
+		}
+		
+	}
+			
 	cout << "Qual senha?" << endl;
 	cin >> var_senha;
+	
+	while (var_senha.length() > 12) {
+		
+		cout << "Invalido!!" << endl;
+		cout << " " << endl;
+		cout << "Qual senha?" << endl;
+		cin >> var_senha;
+		
+	} 
 	
 	cout << "Qual o login?" << endl;
 	cin >> var_login;
 	
+		while (var_login.length() > 12) {
+			
+		cout << "Invalido!!" << endl;
+		cout << " " << endl;
+		cout << "Qual o login?" << endl;
+		cin >> var_login;
+		
+	}
+	
 	cout << "Qual o nome?" << endl;
 	cin >> var_nome;
+	cout << "------------------------" << endl;
 	
-	//_________________ADICIONAR O ELEMENTO NO VETOR
-	count_elm();
-	
+		while (var_nome.length() > 12) {
+		
+		cout << "Invalido!!" << endl;
+		cout << " " << endl;
+		cout << "Qual o nome?" << endl;
+		cin >> var_nome;
+		
+		
+ }
+
 	       //!! ATENÇÃO AO IMPLEMENTAR OS ESPAÇOS____________
 	login[lv_count] = var_login; 
 		
 	senha[lv_count] = var_senha;
-	
-    lvl[lv_count] = var_nivel;
     
     nome[lv_count] = var_nome;
-    
-    //REDEFINIR__________
-	lv_count = 0;
 	
-	//_______RETORNAR!!!!!
-    return var_login;
-}
-
-
-//LISTAR_____________________
-void listar () {
-int menu_curse;
+	  //REDEFINIR__________
 	
-	//CHAMAR A FUNÇAO
-	count_elm ();
-	
-	cout << "Digite 1 para listar todos e 2 para apenas os ativos" << endl;
-	cin >> menu_curse;
-	
-	if (menu_curse == 1) {
+	//colocando dados no ficheiro--------------------------------
+	if (ficheiro_admin.is_open()) {
 		
-	    for (int i=0; i<lv_count; i++) {
-						
-		    cout << "----------------------------------" << endl;
-		
-		    cout << "Nome: " << nome[i] << endl;
-		    cout << "Nivel: " << lvl[i] << endl;
-		    cout << "Senha: " << senha[i] << endl;
-		    cout << "login: " << login[i] << endl;
-		    cout << " " << endl;
-		
-	   }
+		for (int i=0; i<lv_count + 1; i++) {
+			
+			ficheiro_admin << nome[i] << endl;
 	
-    } else {
-    	
-    	for (int c=0; c<lv_count; c++) {
-    		
-    		if (lvl[c] != 'D') {
-    			
-    		cout << "----------------------------------" << endl;
-		
-		    cout << "Nome: " << nome[c] << endl;
-		    cout << "Nivel: " << lvl[c] << endl;
-		    cout << "Senha: " << senha[c] << endl;
-		    cout << "login: " << login[c] << endl;
-		    cout << " " << endl;
-    			
-    			
-			}
-    		
-    		
+	    	ficheiro_senha << senha[i] << endl;
+	    	
+	    	ficheiro_nivel << lvl[i] << endl;
+	    	
 		}
-    	
-    	
+		
 	}
-	//REDEFINIR SE NAO DA ERRO
-	lv_count = 0;
+	
+	//ficheiros fechados-------------------------------
+	ficheiro_nivel.close();
+	ficheiro_senha.close();
+    ficheiro_admin.close();
+    lv_count = 0;
 }
 
-// ALTERAR_____________________________________
-string alterar () {
+void listar () { //Procedimento para listar admins
+
+	int menu_curse;
+		
+		count_elm (); //Contagem de elementos
+		
+		cout << "----------------------------------------------------" << endl;
+		cout << "Digite 1 para listar todos e 2 para apenas os ativos" << endl;
+		cin >> menu_curse;
+		
+		while (menu_curse != 1 && menu_curse != 2) {
+			
+			cout << "Digite apenas 1 ou 2 >:/" << endl;
+			cout << " " << endl;
+			cin >> menu_curse;
+			
+		}
+		
+		if (menu_curse == 1) {
+			
+			cout << " " << endl;			
+			cout << "----------------------------------" << endl;
+			cout << "-------------LISTANDO-------------" << endl;
+			
+		    for (int i=0; i<lv_count; i++) {
+				
+			    cout << "Nome: " << nome[i] << endl;
+			    cout << "Nivel: " << lvl[i] << endl;
+			    cout << "Senha: " << senha[i] << endl;
+			    cout << "login: " << login[i] << endl;
+			    cout << " " << endl;
+			
+		   }
+		
+	    } else {
+	    	
+	    	for (int c=0; c<lv_count; c++) {
+	    		
+	    		if (lvl[c] != 'D') {
+	    			
+	    		cout << "----------------------------------" << endl;
+			    cout << "-------------LISTANDO-------------" << endl;
+			    cout << "Nome: " << nome[c] << endl;
+			    cout << "Nivel: " << lvl[c] << endl;
+			    cout << "Senha: " << senha[c] << endl;
+			    cout << "login: " << login[c] << endl;
+			    cout << " " << endl;		
+	    			
+				}
+	    			
+			}
+	    		
+		}
+
+		lv_count = 0; //Reinicia a variável de contagem de elementos
+}
+
+void alterar () { //Procedimento para alterar informacoes dos admins
 	
-	cout << "Deseja alterar algum cliente?" << endl;
+	cout << " " << endl;
+	cout << "-----------------------------" << endl;
+	cout << "Deseja alterar algum Admin?" << endl;
 	cin >> procura;
+	cout << " " << endl;
 	
 	if (procura != "sim") {
 		
@@ -235,52 +392,100 @@ string alterar () {
 		
 	}else {
 		
-		// CHAMANDO A FUNCAO PARA O VETOR
 		count_elm ();
 		
+		cout << "--------------" << endl;
 		cout << "Quem?" << endl;
 		cin >> procura;
+		cout << " " << endl;
 		
 		// EDITANDO______________________
 		for (int a=0; a<lv_count; a++) {
 			
 			if (procura == nome[a]) {
 				
+				cout << "--------------------------" << endl;
 				cout << "Novo nome: ";
 				cin >> var_nome;
 				nome[a] = var_nome;
-				
+                
+				while (var_nome.length() > 12) {
+		
+		        cout << "Invalido!!" << endl;
+		        cout << " " << endl;
+		        cout << "Qual o nome?" << endl;
+		        cin >> var_nome;
+		
+	            } 
+											
 				cout << "Novo nivel: ";
 				cin >> var_nivel;
 				lvl[a] = var_nivel;
+				
+				while (var_nivel != 'S' && var_nivel != 'A' && var_nivel != 'B' && var_nivel != 'C') {
+		
+	         	cout << "Invalido!!" << endl;
+		        cout << " " << endl;
+		        cout << "Qual o nivel?" << endl;
+		        cin >> var_nivel;
+		
+	            } 
 				
 				cout << "Nova senha: ";
 				cin >> var_senha;
 				senha[a] = var_senha;
 				
+				while (var_senha.length() > 12) {
+		
+		        cout << "Invalido!!" << endl;
+		        cout << " " << endl;
+		        cout << "Qual a senha?" << endl;
+		        cin >> var_senha;
+		
+	            } 
+				
 				cout << "Novo login: ";
 				cin >> var_login;
 				login[a] = var_login;
 				
+				while (var_login.length() > 12) {
+		
+		        cout << "Invalido!!" << endl;
+		        cout << " " << endl;
+		        cout << "Qual o login?" << endl;
+		        cin >> var_login;
+		        
+	            } 
+				cout << "----------------------------" << endl;
+				
+				cout << " " << endl;
+				
 			}
-			
-			
+				
 		}
 		
 	}
 	
-	// REDEFINIR____________________________
 	lv_count = 0;
-	
-	return var_login;
 	
 }
 
-//DELETAR_____________________________________
-char deleta () {
+char deleta () { //Funcao para remover o admin
 	
+	cout << "Deseja deletar alguem?" << endl;
+	cin >> procura;
+	
+	if (procura != "sim") {
+		
+		cout << "OK! voltando para o menu principal" << endl;
+		cout << "------------------------" << endl;
+		cout << " " << endl;
+		
+	}else {
+		
 		count_elm ();
 		
+		cout << "------------------------" << endl;
 		cout << "Quem?" << endl;
 		cin >> procura;
 		cout << " " << endl;
@@ -290,79 +495,210 @@ char deleta () {
 			if (procura == nome[n]) {
 				
 				lvl[n] = 'D';
-
-			}
-			
+				cout << "Remoção concluida" << endl;
+				cout << "-------------------------" << endl;
+                cout << " " << endl;
+			} 
 		}
-	
+   }
+   
 	lv_count = 0;
 	
 	return var_nivel;
 }
 
-// MENU PRINCIPAL_____________________________
-void menu_prc () {
+void menu_prc () { //Menu principal
 	
+	cout << "--------MENU PRINCIPAL--------" <<endl;
 	cout << "1- Cadastrar aluno" << endl;
 	cout << "2- Exibir alunos" << endl;
-	
+	cout << "3- Remover alunos" << endl;
+	cout << "4- Alterar aluno" << endl;
 }
 
-// CADASTRO DOS ALUNOS______________________________
-string cadastro_alunos () {
+void cadastro_alunos () { //Procendimento para cadastrar alunos
 	
+	cout << "------------------CADASTRO----------------------" << endl;
 	cout << "Qual o nivel?" << endl;
 	cin >> var_nivel_alunos;
+	
+	while (var_nivel_alunos != 'A' && var_nivel_alunos != 'B' && var_nivel_alunos != 'C') {
+		
+	    cout << "Invalido!!" << endl;
+		cout << " " << endl;
+		cout << "Qual o nivel?" << endl;
+	    cin >> var_nivel_alunos;
+		
+	} 
 	
 	cout << "Qual o nome?" << endl;
 	cin >> var_alunos;
 	
+	while (var_alunos.length() > 12) {
+		
+		cout << "Invalido!!" << endl;
+		cout << " " << endl;
+		cout << "Qual o nome?" << endl;
+		cin >> var_alunos;
+		        	
+	} 
+	
 	cout << "Qual a turma?" << endl;
 	cin >> var_turmas;
-	//_________________ADICIONAR O ELEMENTO NO VETOR
+	cout << "--------------------------------------------------" << endl;
+	cout << " " << endl;
+	
+	while (var_turmas.length() > 12) {
+		
+		cout << "Invalido!!" << endl;
+	    cout << " " << endl;
+		cout << "Qual a turma?" << endl;
+	    cin >> var_turmas;
+		        
+		
+	} 
+		
 	count_elm_alunos ();
-	
-	       //!! ATENÇÃO AO IMPLEMENTAR OS ESPAÇOS____________
 	       
-    lvl_alunos[lv_count] = var_nivel_alunos;
+    lvl_alunos[lv_count_alunos] = var_nivel_alunos;
     
-    alunos[lv_count] = var_alunos;
+    alunos[lv_count_alunos] = var_alunos;
     
-    turmas[lv_count] = var_turmas;
+    turmas[lv_count_alunos] = var_turmas;
     
-    //REDEFINIR__________
-	lv_count_alunos = 0;
-	
-	//_______RETORNAR!!!!!
-    return var_alunos;
+	lv_count_alunos=0;
 		
 }
 
-// LISTAR ALUNOS____________________________________
-void listar_alunos () {
+void listar_alunos () { //Procedimento para listar alunos
 	
 	count_elm_alunos ();
-	
+						
+	cout << "------------LISTANDO------------" << endl;					
 	for (int i=0; i<lv_count_alunos; i++) {
 						
-		    cout << "----------------------------------" << endl;
 		
 		    cout << "Nome: " << alunos[i] << endl;
 		    cout << "Nivel: " << lvl_alunos[i] << endl;
 		    cout << "turma: " << turmas[i] << endl;
 		    cout << " " << endl;
-		
+		    
+		    cout << "---------------------------------" << endl;
 	   }
 	
 	lv_count_alunos = 0;
 }
 
+char deletar () { //Funcao para deletar alunos
+	
+	count_elm_alunos ();
+	
+	cout << " " << endl;
+	cout << "Quem?" << endl;
+	cin >> procura;	
+	cout << " " << endl;
+		
+	for (int n=0; n<lv_count_alunos; n++) {
+		
+		if (procura == alunos[n]) {
+			
+			lvl_alunos[n] = 'D';
+			cout << "-----------------------" << endl;
+			cout << " " << endl;
+		}
+			
+    }
+    
+    lv_count_alunos = 0;
+    
+    return var_nivel_alunos;
+}
+
+string alterar_alunos () { //Funcao para alterar alunos
+	
+	cout << " " << endl;
+	cout << "---------------------------" << endl;
+	cout << "Deseja alterar algum aluno?" << endl;
+	cin >> procura;
+	cout << " " << endl;
+	
+	if (procura != "sim") {
+		
+		cout << "OK! voltando para o menu principal" << endl;
+		cout << "------------------------" << endl;
+		cout << " " << endl;
+		
+	}else {
+		
+		cout << "----------------------------" << endl;
+		cout << "Quem?" << endl;
+		cin >> procura;	
+		cout << " " << endl;	
+			
+	    for (int a=0; a<=lv_count_alunos; a++) {
+		
+		    if (procura == alunos[a]) {
+			
+                cout << "-----------ALTERANDO-----------" << endl;			
+			    cout << "Novo nome: ";
+			    cin >> var_alunos;
+			    alunos[a] = var_alunos;
+				
+				while (var_alunos.length() > 12) {
+		
+		            cout << "Invalido!!" << endl;
+		            cout << " " << endl;
+		            cout << "Qual o nome?" << endl;
+		            cin >> var_alunos;
+		        		
+	            } 
+					
+			    cout << "Novo nivel: ";
+			    cin >> var_nivel_alunos;
+			    lvl_alunos[a] = var_nivel_alunos;
+				
+				while (var_nivel_alunos != 'A' && var_nivel_alunos != 'B' && var_nivel_alunos != 'C') {
+		
+	                cout << "Invalido!!" << endl;
+	            	cout << " " << endl;
+		            cout << "Qual o nivel?" << endl;
+	                cin >> var_nivel_alunos;
+		
+	            } 
+				
+			    cout << "Nova turma: ";
+			    cin >> var_turmas;
+			    turmas[a] = var_turmas;
+			    
+			    while (var_turmas.length() > 12) {
+		
+		            cout << "Invalido!!" << endl;
+		            cout << " " << endl;
+		            cout << "Qual a turma?" << endl;
+		            cin >> var_turmas;
+		        		
+	            } 
+	            
+			    cout << "_________________________________" << endl;
+			    cout << " " << endl;
+			    
+		   }
+		
+	    } 
+   }
+   
+	lv_count_alunos = 0;
+	
+	return var_alunos;
+	
+}
+
 //----------------------PRINCIPAL____________________________
 int main(int argc, char** argv) {
 
+	
 char vrff;
-
-int cursor;
+int* value;
 
 vrff = acess();
 	
@@ -372,6 +708,8 @@ vrff = acess();
 		//FUNCAO DO MENU_______
 		menu_admin();
 		cin >> cursor;
+		
+		cout << "---------------------------------" << endl;
 		cout << " " << endl;
 		
 		//MENU COM AS FUNÇOES COMEÇA AQUI!!!!!!____________________
@@ -403,6 +741,7 @@ vrff = acess();
 			
 			case 5:
 				
+				cout << "Você saiu do programa" << endl;
    			    return 0;
 						   	
 		}
@@ -416,7 +755,7 @@ vrff = acess();
 		
 	     menu_prc ();
 		cin >> cursor;	
-		
+        cout << "-----------------------------------" << endl;
 		switch (cursor) {
 	
 		case 1:
@@ -428,6 +767,18 @@ vrff = acess();
 		case 2:
 		
 			listar_alunos ();
+			
+		break;
+		
+		case 3:
+		
+			deletar ();
+		
+		break;
+		
+		case 4:
+			
+			alterar_alunos ();
 	   }
     }
 	
@@ -436,7 +787,9 @@ vrff = acess();
 	//Ex-Admins Acesso
 	if (vrff == 'D') {
 
+        cout << "---------------------------------------------" << endl;
 		cout << "Você não tem autorização para entrar" << endl;
+		cout << "---------------------------------------------" << endl;
 		return 0;
     }
     

@@ -1,0 +1,79 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <vector>
+#define MAX 10
+#include <stdio.h>
+#include <cctype>
+#include <typeinfo>
+#include <fstream>
+#include <locale>
+#include <sstream>        
+
+//w = apaga o conteudo do arquivo e edita
+//r = lê o arquivo
+//a = Edita o arquivo sem remover o conteudo
+
+int main() {
+    
+    char string[400], nome[100];
+    int inteiro, n1;
+    float decimal, n2;	
+    char conteudo[400];
+    
+    FILE* arquivo;
+    
+    printf ("Digite o nome: "); 
+    gets(nome);
+    
+    arquivo = fopen(nome, "w");
+    printf("Digite algo no arquivo: ");
+    fflush(stdin);
+    gets(string);
+    fprintf(arquivo, "%s\n", string);
+    
+    printf("Digite um numero inteiro: ");
+    scanf("%d", &inteiro);
+    fprintf(arquivo, "%d", inteiro);
+    
+    printf("Digite um numero decimal: ");
+    scanf("%f", &decimal);
+    fprintf(arquivo, "%f ", decimal);
+    printf("\n\n");
+    fclose(arquivo);
+    
+    //ler o arquivo-----------------------------------------
+    
+    arquivo = fopen(nome, "r");
+    printf("\nConteudo do arquivo: ");
+    fgets(conteudo, 100, arquivo);
+    //gets e fgets leem a string ate a quebra de linha 
+    printf("%s\n", conteudo); 
+    fscanf(arquivo, "%d %f\n", n1, n2);
+    
+    fclose(arquivo);
+    
+	// CONTINUAR EDITANDO O ARQUIVO
+	arquivo = fopen(nome, "a");
+	printf ("Digite outra coisa para continuar escrevendo: ");
+	fflush(stdin);
+	gets(string);
+	fprintf(arquivo, "%s\n", string );
+	fclose(arquivo);
+	
+	//LER oq escrevemos 
+	
+	arquivo = fopen(nome, "r");
+	printf("Conteudo do arquivo: \n");
+	while (fgets(conteudo, 400, arquivo)!=NULL){
+		
+		printf ("%s", conteudo);
+		
+	}
+	
+	fclose (arquivo);
+	getchar(); 
+	 
+    return 0;
+    
+}

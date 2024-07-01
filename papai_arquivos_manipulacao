@@ -79,3 +79,31 @@ int main(int argc, char** argv) {
 "--------------------------------------------------------------------------------------------------------------------------------------------------
 "--------------------------------------------------------------------------------------------------------------------------------------------------
 [CARREGAR TEXTO DO ARQUIVO PARA UM VETOR]
+
+// Abrir o arquivo em modo de append para adicionar ao final sem apagar o conteúdo existente
+	ofstream arquivo_append;
+	
+	arquivo_append.open("arquivo", ios::app);
+	
+	if (!arquivo_append) {
+		cout << "File not created!";
+	}
+	else {
+		
+		array[0] = "Nome1";
+		array[1] = "Nome2";
+		array[2] = "Nome3";
+		
+		for (int i = 0; i < 3; i++) {
+			arquivo_append << array[i] << endl;
+		}
+		
+		arquivo_append.close(); 
+	}
+	
+	for (int i = 0; i < 10; i++) {
+		cout << array[i] << endl;
+	}
+	
+	return 0;
+}

@@ -9,6 +9,10 @@
 #include <typeinfo>
 #include <fstream>
 #include <locale>
+#include <windows.h>
+#include <winspool.h>
+#include <sstream>      
+
 
 using namespace std;
 
@@ -47,6 +51,7 @@ string procura;
 int cursor; 
 int lv_count = 0;
 int lv_count_alunos = 0;
+int id;
 
 //FICHEIROS
 ofstream ficheiro_admin;
@@ -67,15 +72,9 @@ ofstream ficheiro_lvl_alns;
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 
-bool isInteger(const int& cursor) {
-    for (char c; c = ' '; c++) {
-        if (!isdigit(c)) {
-            return false;
-        }
-    }
-    return true;
-}
 
+//_____________________________COLOCAR O QUE TEM NO TXT PARA O VETOR _____________________
+ //aqui:
 
 int count_elm () {	//Funcao para contar elementos de um vetor.
 	for (int i=0; i<MAX; i++) {		
@@ -85,6 +84,44 @@ int count_elm () {	//Funcao para contar elementos de um vetor.
 	}
 	return lv_count;	
 }
+
+void dar_append() {
+
+// AQUI ______________________________________________
+        
+	}
+
+void salvar_admin (string arquivotxt) {
+	
+ //	ofstream ficheiro_admin(arquivotxt.c_str()) {
+ 
+	ficheiro_admin.open("admin", ios::out);
+	if (!ficheiro_admin) {
+			
+	    cout << "File not created!";
+	    
+	}
+	
+	else {
+		        
+		                                            
+
+	}
+
+		ficheiro_admin.close(); 
+		
+}
+	
+	
+bool isInteger(const int& cursor) {
+    for (char c; c = ' '; c++) {
+        if (!isdigit(c)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 
 int count_elm_alunos () { //Funcao para contar elementos de um vetor.alunos
 	for (int i=0; i<MAX; i++) {		
@@ -178,6 +215,7 @@ void menu_admin () { //Funcao para dar display no menu
     cout << "3 - Editar" << endl;
     cout << "4 - Deletar" << endl;
     cout << "5 - Sair" << endl;
+    cout << "6- listar todos arquivados" << endl;
     cout << "Opcao: ";
     
 }
@@ -300,7 +338,7 @@ void cadastro () { //Funcao para cadastro de admins
 	//colocando dados no ficheiro--------------------------------
 	if (ficheiro_admin.is_open()) {
 		
-		for (int i=0; i<lv_count + 1; i++) {
+		for (int i=0; i<lv_count + lv_count; i++) {
 			
 			ficheiro_admin << nome[i] << endl;
 	
@@ -514,12 +552,17 @@ void menu_prc () { //Menu principal
 	cout << "2- Exibir alunos" << endl;
 	cout << "3- Remover alunos" << endl;
 	cout << "4- Alterar aluno" << endl;
+	cout << "5- Sair do prgrama" << endl;
 }
 
 void cadastro_alunos () { //Procendimento para cadastrar alunos
 	
+	ficheiro_alunos.open("alunos.txt");
+	ficheiro_turmas.open("turmas.txt"); 
+	ficheiro_lvl_alns.open("nivel_alunos.txt");
+	
 	cout << "------------------CADASTRO----------------------" << endl;
-	cout << "Qual o nivel?" << endl;
+	cout << "Qual o nivel? (A, B ou C)" << endl;
 	cin >> var_nivel_alunos;
 	
 	while (var_nivel_alunos != 'A' && var_nivel_alunos != 'B' && var_nivel_alunos != 'C') {
@@ -565,6 +608,28 @@ void cadastro_alunos () { //Procendimento para cadastrar alunos
     alunos[lv_count_alunos] = var_alunos;
     
     turmas[lv_count_alunos] = var_turmas;
+    
+    if (ficheiro_alunos.is_open()) {
+		
+		for (int i=0; i<lv_count_alunos + lv_count_alunos; i++) {
+			
+			
+			ficheiro_alunos << alunos[i] << endl;
+	
+	    	ficheiro_turmas << turmas[i] << endl;
+	    	
+	    	ficheiro_lvl_alns << lvl_alunos[i] << endl;
+	    	
+		}
+		
+	}
+	
+	//ficheiros fechados-------------------------------
+	ficheiro_alunos.close();
+	ficheiro_turmas.close();
+    ficheiro_lvl_alns.close();
+    
+    
     
 	lv_count_alunos=0;
 		
@@ -743,6 +808,12 @@ vrff = acess();
 				
 				cout << "Você saiu do programa" << endl;
    			    return 0;
+   			    
+   			break;
+			   
+			case 6: 
+			    
+			    //DAR APPEND !!_______________________
 						   	
 		}
 		
@@ -753,7 +824,7 @@ vrff = acess();
 	//Menu User
 	while (vrff == 'A' || vrff == 'C' || vrff == 'B')	{
 		
-	     menu_prc ();
+	    menu_prc ();
 		cin >> cursor;	
         cout << "-----------------------------------" << endl;
 		switch (cursor) {
@@ -779,6 +850,13 @@ vrff = acess();
 		case 4:
 			
 			alterar_alunos ();
+			
+		break;
+		
+		case 5:
+		
+			cout << "Encerrando programa" << endl;
+			return 0;
 	   }
     }
 	

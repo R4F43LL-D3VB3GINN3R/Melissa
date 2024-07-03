@@ -4,13 +4,10 @@
 #include <vector>
 #define MAX 10
 #include <stdio.h>
-#include <conio.h>
 #include <cctype>
 #include <typeinfo>
 #include <fstream>
 #include <locale>
-#include <windows.h>
-#include <winspool.h>
 #include <sstream>      
 
 
@@ -23,10 +20,10 @@ using namespace std;
 
 //Admin
 //------------------------------------------------
-string nome[MAX] = {"mel", "Joana", "ceci", "gi"};
-string login[MAX] = {"..", "...", ".", "...."};
-string senha[MAX] = {"..", "...", ".", "...."};
-char lvl[MAX] = {'S', 'A', 'C', 'D'};
+string nome[MAX] = {};
+string login[MAX] = {".."};
+string senha[MAX] = {".."};
+char lvl[MAX] = {'S'};
 //--
 string var_nome;
 string var_login;
@@ -53,28 +50,10 @@ int lv_count = 0;
 int lv_count_alunos = 0;
 int id;
 
-//FICHEIROS
-ofstream ficheiro_admin;
-
-ofstream ficheiro_senha;
-
-ofstream ficheiro_nivel;
-
-//--------------------------------------------
-
-ofstream ficheiro_alunos;
-
-ofstream ficheiro_turmas;
-
-ofstream ficheiro_lvl_alns;
-
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 
-
-//_____________________________COLOCAR O QUE TEM NO TXT PARA O VETOR _____________________
- //aqui:
 
 int count_elm () {	//Funcao para contar elementos de um vetor.
 	for (int i=0; i<MAX; i++) {		
@@ -84,44 +63,6 @@ int count_elm () {	//Funcao para contar elementos de um vetor.
 	}
 	return lv_count;	
 }
-
-void dar_append() {
-
-// AQUI ______________________________________________
-        
-	}
-
-void salvar_admin (string arquivotxt) {
-	
- //	ofstream ficheiro_admin(arquivotxt.c_str()) {
- 
-	ficheiro_admin.open("admin", ios::out);
-	if (!ficheiro_admin) {
-			
-	    cout << "File not created!";
-	    
-	}
-	
-	else {
-		        
-		                                            
-
-	}
-
-		ficheiro_admin.close(); 
-		
-}
-	
-	
-bool isInteger(const int& cursor) {
-    for (char c; c = ' '; c++) {
-        if (!isdigit(c)) {
-            return false;
-        }
-    }
-    return true;
-}
-
 
 int count_elm_alunos () { //Funcao para contar elementos de um vetor.alunos
 	for (int i=0; i<MAX; i++) {		
@@ -221,11 +162,6 @@ void menu_admin () { //Funcao para dar display no menu
 }
 
 void cadastro () { //Funcao para cadastro de admins
-	
-	//ficheiros abertos-----------------------------------
-	ficheiro_nivel.open("niveis_adm.txt");
-	ficheiro_admin.open("admin.txt"); 
-	ficheiro_senha.open("senhas_adm.txt");
 	
 	int tamanho = 0;
 	char lvl_choice;
@@ -334,26 +270,7 @@ void cadastro () { //Funcao para cadastro de admins
     nome[lv_count] = var_nome;
 	
 	  //REDEFINIR__________
-	
-	//colocando dados no ficheiro--------------------------------
-	if (ficheiro_admin.is_open()) {
-		
-		for (int i=0; i<lv_count + lv_count; i++) {
-			
-			ficheiro_admin << nome[i] << endl;
-	
-	    	ficheiro_senha << senha[i] << endl;
-	    	
-	    	ficheiro_nivel << lvl[i] << endl;
-	    	
-		}
-		
-	}
-	
-	//ficheiros fechados-------------------------------
-	ficheiro_nivel.close();
-	ficheiro_senha.close();
-    ficheiro_admin.close();
+	  
     lv_count = 0;
 }
 
@@ -557,10 +474,6 @@ void menu_prc () { //Menu principal
 
 void cadastro_alunos () { //Procendimento para cadastrar alunos
 	
-	ficheiro_alunos.open("alunos.txt");
-	ficheiro_turmas.open("turmas.txt"); 
-	ficheiro_lvl_alns.open("nivel_alunos.txt");
-	
 	cout << "------------------CADASTRO----------------------" << endl;
 	cout << "Qual o nivel? (A, B ou C)" << endl;
 	cin >> var_nivel_alunos;
@@ -609,28 +522,6 @@ void cadastro_alunos () { //Procendimento para cadastrar alunos
     
     turmas[lv_count_alunos] = var_turmas;
     
-    if (ficheiro_alunos.is_open()) {
-		
-		for (int i=0; i<lv_count_alunos + lv_count_alunos; i++) {
-			
-			
-			ficheiro_alunos << alunos[i] << endl;
-	
-	    	ficheiro_turmas << turmas[i] << endl;
-	    	
-	    	ficheiro_lvl_alns << lvl_alunos[i] << endl;
-	    	
-		}
-		
-	}
-	
-	//ficheiros fechados-------------------------------
-	ficheiro_alunos.close();
-	ficheiro_turmas.close();
-    ficheiro_lvl_alns.close();
-    
-    
-    
 	lv_count_alunos=0;
 		
 }
@@ -642,7 +533,6 @@ void listar_alunos () { //Procedimento para listar alunos
 	cout << "------------LISTANDO------------" << endl;					
 	for (int i=0; i<lv_count_alunos; i++) {
 						
-		
 		    cout << "Nome: " << alunos[i] << endl;
 		    cout << "Nivel: " << lvl_alunos[i] << endl;
 		    cout << "turma: " << turmas[i] << endl;
@@ -760,7 +650,22 @@ string alterar_alunos () { //Funcao para alterar alunos
 
 //----------------------PRINCIPAL____________________________
 int main(int argc, char** argv) {
-
+    
+    int i = 0;
+    
+    ifstream nome_admin;
+    nome_admin.open("admin.txt");
+    
+    if (!nome_admin) {
+		cout << "Arquivos N Encontrados" << endl;
+    } else {
+        string text;
+        while(getline(nome_admin, text)){
+           nome[i] = text;
+           i++;
+                                  }
+           nome_admin.close();
+}
 	
 char vrff;
 int* value;
@@ -813,7 +718,7 @@ vrff = acess();
 			   
 			case 6: 
 			    
-			    //DAR APPEND !!_______________________
+			    cout << "aaaa" << endl;
 						   	
 		}
 		

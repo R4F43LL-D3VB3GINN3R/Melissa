@@ -54,6 +54,7 @@ ofstream logins;
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
 
+
 int count_elm () {	//Funcao para contar elementos de um vetor.
 
 	for (int i=0; i<MAX; i++) {
@@ -73,16 +74,83 @@ int count_elm_alunos () { //Funcao para contar elementos de um vetor.alunos
 	return lv_count_alunos;
 }
 
-void append () {
+void append () { // SALVAR ALTERAÇÔES
+
+	ofstream nome_admin;
+	nome_admin.open("admin.txt");
+
+	if (!nome_admin) {
+		cout << "File not created!";
+	}
+	else {
+
+		count_elm();
+		for (int i=0; i<lv_count; i++) {
+			nome_admin << nome[i] << endl;
+		}
+		nome_admin.close();
+	}
+
+	ofstream niveis;
+	niveis.open("niveis.txt");
+
+	if (!niveis) {
+		cout << "File not created!";
+	}
+	else {
+
+		count_elm();
+		for (int i=0; i<lv_count; i++) {
+			niveis << lvl[i] << endl;
+		}
+		niveis.close();
+	}
+
+	ofstream senhas;
+	senhas.open("senhas.txt");
+
+	if (!senhas) {
+		cout << "File not created!";
+	}
+	else {
+
+		count_elm();
+		for (int i=0; i<lv_count; i++) {
+			senhas << senha[i] << endl;
+		}
+		senhas.close();
+	}
+
+	ofstream logins;
+	logins.open("logins.txt");
+
+	if (!logins) {
+		cout << "File not created!";
+	}
+	else {
+
+		count_elm();
+		for (int i=0; i<lv_count; i++) {
+			logins << login[i] << endl;
+		}
+		logins.close();
+	}
+
+    cout << "Salvo com sucesso! :)" << endl;
+}
+
+void jg_array () { // JOGAR OS DADOS PROS VETORES
 
 	ifstream nome_admin;
 	nome_admin.open("admin.txt");
 
 	if (!nome_admin) {
+
 		cout << "Arquivos N Encontrados" << endl;
+
 	} else {
 
-		int num= 0;
+		int num = 0;
 		string text;
 		while(getline(nome_admin, text)){
 			nome[num] = text;
@@ -100,11 +168,12 @@ void append () {
 
 	} else {
 
+		int num = 0;
 		string text;
-		while(getline(niveis, text)){
-			int num=0;
-			if (!text.empty()) {
+		while(getline(niveis, text)) {
+			if (!text.empty()) { // casting de string para char
 				lvl[num] = text[0];
+				num++;
 			}
 		}
 
@@ -119,9 +188,9 @@ void append () {
 		cout << "Arquivos N Encontrados" << endl;
 	} else {
 
+		int num = 0;
 		string text;
 		while (getline(senhas, text)) {
-			int num = 0;
 			senha[num] = text;
 			num++;
 
@@ -137,10 +206,10 @@ void append () {
 		cout << "Arquivos N Encontrados" << endl;
 	} else {
 
+		int num = 0;
 		string text;
 		while (getline(logins, text)) {
 
-			int num = 0;
 			login[num] = text;
 			num++;
 
@@ -203,14 +272,6 @@ char acess () { //Funcao para logar no sistema como um admin
 
 		}
 
-		cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-		cout << "." << endl;
-		cout << ".." << endl;
-		cout << "..." << endl;
-		cout << "..." << endl;
-		cout << ".." << endl;
-		cout << "." << endl;
-
         // REDEFINIR A VARIAVEL__________
 	    lv_count = 0;
 }
@@ -231,8 +292,8 @@ void menu_admin () { //Funcao para dar display no menu
     cout << "2 - Listar" << endl;
     cout << "3 - Editar" << endl;
     cout << "4 - Deletar" << endl;
-    cout << "5 - Sair" << endl;
-    cout << "6- dar append" << endl;
+	cout << "5 - salvar alterações" << endl;
+    cout << "6 - Sair" << endl;
     cout << "Opcao: ";
 
 }
@@ -724,7 +785,7 @@ string alterar_alunos () { //Funcao para alterar alunos
 //----------------------PRINCIPAL____________________________
 int main(int argc, char **argv) {
 
-	append();
+	jg_array();
 
 	char vrff = acess();
 
@@ -767,14 +828,14 @@ int main(int argc, char **argv) {
 
 			case 5:
 
-				cout << "Você saiu do programa" << endl;
-			    append();
-   			    return 0;
+				append();
+
+			break;
 
 			case 6:
 
-			    append();
-            break;
+				cout << "Você saiu do programa" << endl;
+   			    return 0;
 
 			default:
 
@@ -821,13 +882,11 @@ int main(int argc, char **argv) {
 		case 5:
 
 			cout << "Encerrando programa" << endl;
-			append();
 			return 1;
 
 		default:
 
 			cout << "Acesse uma opcao valida" << endl;
-
 			break;
 	   }
 
@@ -846,3 +905,4 @@ int main(int argc, char **argv) {
 
 	return 0;
 }
+

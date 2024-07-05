@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#define MAX 10
+#define MAX 100
 #include <fstream>
 #include <locale>
 
@@ -13,15 +13,15 @@ using namespace std;
 
 //Admin
 //------------------------------------------------
-string nome[MAX] = {};
-string login[MAX] = {".."};
-string senha[MAX] = {".."};
-char lvl[MAX] = {'S'};
+string nome[MAX];
+string login[MAX];
+string senha[MAX];
+char lvl[MAX];
 //--
 string var_nome;
 string var_login;
 string var_senha;
-char var_nivel;
+int var_nivel;
 //------------------------------------------------
 
 //Aluno
@@ -42,10 +42,13 @@ int cursor;
 int lv_count = 0;
 int lv_count_alunos = 0;
 int id;
-
 //Arquivos
 //------------------------------------------------
+
 ofstream nome_admin;
+ofstream niveis;
+ofstream senhas;
+ofstream logins;
 
 //-----------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------
@@ -70,6 +73,84 @@ int count_elm_alunos () { //Funcao para contar elementos de um vetor.alunos
 	return lv_count_alunos;
 }
 
+void append () {
+
+	ifstream nome_admin;
+	nome_admin.open("admin.txt");
+
+	if (!nome_admin) {
+		cout << "Arquivos N Encontrados" << endl;
+	} else {
+
+		int num= 0;
+		string text;
+		while(getline(nome_admin, text)){
+			nome[num] = text;
+			num++;
+		}
+		nome_admin.close();
+	}
+
+	ifstream niveis;
+	niveis.open("niveis.txt");
+
+	if (!niveis) {
+
+		cout << "Arquivo não encontrados" << endl;
+
+	} else {
+
+		string text;
+		while(getline(niveis, text)){
+			int num=0;
+			if (!text.empty()) {
+				lvl[num] = text[0];
+			}
+		}
+
+		niveis.close();
+
+	}
+
+	ifstream senhas;
+	senhas.open("senhas.txt");
+
+	if (!senhas) {
+		cout << "Arquivos N Encontrados" << endl;
+	} else {
+
+		string text;
+		while (getline(senhas, text)) {
+			int num = 0;
+			senha[num] = text;
+			num++;
+
+		}
+
+		senhas.close();
+	}
+
+	ifstream logins;
+	logins.open("logins.txt");
+
+	if (!logins) {
+		cout << "Arquivos N Encontrados" << endl;
+	} else {
+
+		string text;
+		while (getline(logins, text)) {
+
+			int num = 0;
+			login[num] = text;
+			num++;
+
+		}
+
+		logins.close();
+	}
+
+}
+
 char acess () { //Funcao para logar no sistema como um admin
 
 	int erro = 3;
@@ -86,7 +167,6 @@ char acess () { //Funcao para logar no sistema como um admin
 
 		//__________ADICIONAR MAIS UM ESPAÇO NO VETOR
 	    count_elm();
-
 
 		//_______________________VERIFICAÇÂO_________
 		for (int i=0; i<=lv_count + 1; i++) {
@@ -152,7 +232,7 @@ void menu_admin () { //Funcao para dar display no menu
     cout << "3 - Editar" << endl;
     cout << "4 - Deletar" << endl;
     cout << "5 - Sair" << endl;
-    cout << "6- listar todos arquivados" << endl;
+    cout << "6- dar append" << endl;
     cout << "Opcao: ";
 
 }
@@ -176,8 +256,6 @@ void cadastro () { //Funcao para cadastro de admins
 		cout << "4. Nivel C -> Low User" << endl;
 		cout << "Opcao: ";
 		cin >> var_nivel;
-
-
 
 		switch (var_nivel) {
 
@@ -646,20 +724,7 @@ string alterar_alunos () { //Funcao para alterar alunos
 //----------------------PRINCIPAL____________________________
 int main(int argc, char **argv) {
 
-    ifstream nome_admin;
-    nome_admin.open("admin.txt");
-
-    if (!nome_admin) {
-		cout << "Arquivos N Encontrados" << endl;
-    } else {
-        string text;
-    	int num = 0;
-        while(getline(nome_admin, text)){
-           nome[num] = text;
-           num++;
-        }
-           nome_admin.close();
-	}
+	append();
 
 	char vrff = acess();
 
@@ -703,11 +768,13 @@ int main(int argc, char **argv) {
 			case 5:
 
 				cout << "Você saiu do programa" << endl;
+			    append();
    			    return 0;
 
 			case 6:
 
-			    cout << "aaaa" << endl;
+			    append();
+            break;
 
 			default:
 
@@ -754,6 +821,7 @@ int main(int argc, char **argv) {
 		case 5:
 
 			cout << "Encerrando programa" << endl;
+			append();
 			return 1;
 
 		default:

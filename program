@@ -1,0 +1,179 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <vector>
+
+using namespace std;
+
+struct sonic {
+
+    string nome;
+    float peso;
+    int idade;
+    char gen;
+
+};
+
+int main()
+{
+    
+    bool found = false;
+    bool found2 = false;
+
+    string nome_var;
+    float peso_var;
+    int idade_var;
+    char gen_var;
+    int cursor;
+    int limite;
+
+    sonic sonic_vet[100];
+    string pesquisa;
+
+
+    while (true) {
+
+        cout << "1- cadastrar personagem" << endl;
+        cout << "2- listar personagens cadastrados" << endl;
+        cout << "3- remover algum personagem" << endl;
+        cout << "4- alterar" << endl;
+        cout << "5- sair do programa" << endl;
+        cin >> cursor;
+
+        switch (cursor) {
+
+            case 1:
+
+                cout << "Quantos pretende cadastrar? (menor que 100)" << endl;
+                cin >> limite;
+                if (limite > 100 || limite < 0) {
+
+                    cout << "ERRO!! >:( Digite novamente" << endl;
+
+                }else {
+                    for (int i=0; i<limite; i++) {
+
+                        cout << "Nome: ";
+                        cin >> nome_var;
+                        sonic_vet[i].nome = nome_var;
+                        cout << " " << endl;
+
+                        cout << "idade: ";
+                        cin >> idade_var;
+                        sonic_vet[i].idade = idade_var;
+                        cout << " " << endl;
+
+                        cout << "genero: ";
+                        cin >> gen_var;
+                        sonic_vet[i].gen = gen_var;
+                        cout << " " << endl;
+
+                        cout << "peso: ";
+                        cin >> peso_var;
+                        sonic_vet[i].peso = peso_var;
+                        cout << " " << endl;
+                    }
+
+                    cout << " " << endl;
+                }
+
+            break;
+            case 2:
+
+                cout << " " << endl;
+                cout << "------------------------------------" << endl;
+                for (int i=0; i<limite; i++) {
+                    cout << "nome: " << sonic_vet[i].nome << endl;
+                    cout << "idade: " << sonic_vet[i].idade << endl;
+                    cout << "genero: " << sonic_vet[i].gen << endl;
+                    cout << "peso: " << sonic_vet[i].peso << endl;
+                    cout << " " << endl;
+                }
+            cout << " " << endl;
+
+            break;
+
+            case 3:
+
+                cout << " " << endl;
+                cout << "----------------------------------" << endl;
+                cout << "Quem?" << endl;
+                cin >> pesquisa;
+
+            for (int i=0; i<limite; i++) {
+
+                if (pesquisa == sonic_vet[i].nome ) {
+
+                    found = true;
+                    sonic_vet[i].nome = "x";
+                    sonic_vet[i].idade = 0;
+                    sonic_vet[i].gen = 'x';
+                    sonic_vet[i].peso = 0;
+
+                    cout << "PERSONAGEM REMOVIDO! :D" << endl;
+                    cout << " " << endl;
+                }
+            }
+            if (!found) {
+
+                cout << "NÃO ACHADO! :(" << endl;
+                cout << " " << endl;
+            }
+
+            break;
+            case 4:
+
+                cout << " " << endl;
+                cout << "----------------------------------" << endl;
+                cout << "Quem?" << endl;
+                cin >> pesquisa;
+
+                for (int i=0; i<limite; i++) {
+
+                    if (pesquisa == sonic_vet[i].nome ) {
+
+                        found2 = true;
+                        cout << "Novo nome: ";
+                        cin >> nome_var;
+                        sonic_vet[i].nome = nome_var;
+                        cout << " " << endl;
+
+                        cout << "nova idade: ";
+                        cin >> idade_var;
+                        sonic_vet[i].idade = idade_var;
+                        cout << " " << endl;
+
+                        cout << "novo genero: ";
+                        cin >> gen_var;
+                        sonic_vet[i].gen = gen_var;
+                        cout << " " << endl;
+
+                        cout << "novo peso: ";
+                        cin >> peso_var;
+                        sonic_vet[i].peso = peso_var;
+                        cout << " " << endl;
+
+
+                        cout << "PERSONAGEM REMOVIDO! :D" << endl;
+                        cout << " " << endl;
+                    }
+                }
+                if (!found2) {
+
+                    cout << "NÃO ACHADO! :(" << endl;
+                    cout << " " << endl;
+                }
+
+            break;
+            case 5:
+
+                cout << "Você saiu do programa :)" << endl;
+                return 1;
+        }
+
+
+
+    }
+
+    return 0;
+}

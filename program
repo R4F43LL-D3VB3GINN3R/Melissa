@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iostream>
+#include <iostream>
 #include <string>
 #include <cstring>
 #include <vector>
@@ -7,185 +8,181 @@
 
 using namespace std;
 
-//criar uma struct pessoa com nome, idade, peso, sexo e aplicar cadastro, alterar, listar e remover
-
-bool found = false;
+int count;
 bool found2 = false;
-int tamanho;
-int lv_count;
+bool found = false;
 
+//VARIAVEIS______________________
+string nome_var;
+int idade_var;
+char gen_var;
+float peso_var;
 
 struct pessoas {
 
     string nome;
     int idade;
+    char gen;
     float peso;
-    char sexo;
 
-    int count_elm (pessoas pss[], int &i) {	//Funcao para contar elementos de um vetor.
-
-        for (int i=0; i<MAX; i++) {
-            if (!pss[i].nome.empty()) {
-                lv_count++;
-            }
-        }
-        return lv_count;
-    }
-
-
-    void cadastro (pessoas pss[], int &i) {
-
-
-        string nome_var;
-        float peso_var;
-        int idade_var;
-        char sexo_var;
-
-            cout << "Nome: ";
-            cin >> nome_var;
-
-            cout << " " << endl;
-
-            cout << "idade: ";
-            cin >> idade_var;
-
-            cout << " " << endl;
-
-            cout << "peso: ";
-            cin >> peso_var;
-
-            cout << " " << endl;
-
-            cout << "sexo: ";
-            cin >> sexo_var;
-
-            cout << " " << endl;
-
-    pss[lv_count].nome = nome_var;
-    pss[lv_count].idade = idade_var;
-    pss[lv_count].peso = peso_var;
-    pss[lv_count].sexo = sexo_var;
-
-  count_elm(pss, i);
-        lv_count = 0;
-    }
-
-    void listar (pessoas pss[], int &i) {
-
-        count_elm(pss, i);
-        for (int i=0; i<lv_count; i++) {
-
-            cout << " " << endl;
-            cout << "-------------------------------" << endl;
-            cout << "Nome:" << pss[i].nome << endl;
-            cout << "Idade:" << pss[i].idade << endl;
-            cout << "Genero:" << pss[i].sexo << endl;
-            cout << "Peso:" << pss[i].peso << endl;
-            cout << "-------------------------------" << endl;
-            cout << " " << endl;
-
-        }
-
-        lv_count = 0;
-    }
-
-    void alterar (pessoas pss[], int &i) {
-
-        count_elm(pss, i);
-
-        string nome_var;
-        float peso_var;
-        int idade_var;
-        char sexo_var;
-
-        string pesquisa;
-
-        cout << "quem?" << endl;
-        cin >> pesquisa;
-
-        if (pesquisa == pss[i].nome) {
-
-            found = true;
-            cout << "Novo nome: ";
-            cin >> nome_var;
-            pss[i].nome = nome_var;
-            cout << " " << endl;
-
-            cout << "nova idade: ";
-            cin >> idade_var;
-            pss[i].idade = idade_var;
-            cout << " " << endl;
-
-            cout << "novo peso: ";
-            cin >> peso_var;
-            pss[i].peso = peso_var;
-            cout << " " << endl;
-
-            cout << "novo sexo: ";
-            cin >> sexo_var;
-            pss[i].sexo = sexo_var;
-            cout << " " << endl;
-        }else {
-            if (!found) {
-
-                cout << "Não encontrado" << endl;
-                cout << " " << endl;
-            }
-        }
-
-        lv_count = 0;
-    }
-
-    void remover (pessoas pss[], int &i) {
-
-        count_elm(pss, i);
-
-        string nome_var;
-        float peso_var;
-        int idade_var;
-        char sexo_var;
-
-        string pesquisa;
-
-        cout << "quem?" << endl;
-        cin >> pesquisa;
-
-        if (pesquisa == pss[i].nome) {
-
-            found = true;
-            nome_var = "x";
-            pss[i].nome = nome_var;
-
-            idade_var = 0;
-            pss[i].idade = idade_var;
-
-            peso_var = 0;
-            pss[i].peso = peso_var;
-
-            sexo_var = 'X';
-            pss[i].sexo = sexo_var;
-
-        }else {
-
-            if (!found) {
-
-                cout << "Não encontrado" << endl;
-                cout << " " << endl;
-
-            }
-        }
-
-        lv_count = 0;
-    }
 };
 
+int count_elm (pessoas Pessoa[], int &i) {	//Funcao para contar elementos de um vetor.
+
+    for (int i=0; i<MAX; i++) {
+        if (!Pessoa[i].nome.empty()) {
+            count++;
+        }
+    }
+    return count;
+}
+
+void cadastrar (pessoas Pessoa[], int &i) {
+
+    cout << "----------------------------" << endl;
+    cout << "Nome: ";
+    cin >> nome_var;
+    cout << " " << endl;
+
+    cout << "Idade: ";
+    cin >> idade_var;
+    cout << " " << endl;
+
+    cout << "Genero: ";
+    cin >> gen_var;
+    cout << " " << endl;
+
+    cout << "Peso: ";
+    cin >> peso_var;
+    cout << "----------------------------" << endl;
+    cout << " " << endl;
+
+    count_elm(Pessoa, i);
+
+    Pessoa[count].nome = nome_var;
+    Pessoa[count].idade = idade_var;
+    Pessoa[count].gen = gen_var;
+    Pessoa[count].peso = peso_var;
+
+    count = 0;
+}
+
+void alterar (pessoas Pessoa[], int &i) {
+
+    count_elm(Pessoa, i);
+    string pesquisa;
+
+    cout << " " << endl;
+    cout << "----------------------------" << endl;
+    cout << "Quem deseja alterar?" << endl;
+    cin >> pesquisa;
+
+    for (int i=0; i<count; i++) {
+        if (pesquisa == Pessoa[i].nome) {
+
+            found = true;
+            cout << "----------------------------" << endl;
+            cout << "Novo Nome: ";
+            cin >> nome_var;
+            cout << " " << endl;
+
+            cout << "Nova Idade: ";
+            cin >> idade_var;
+            cout << " " << endl;
+
+            cout << "Novo Genero: ";
+            cin >> gen_var;
+            cout << " " << endl;
+
+            cout << "Novo Peso: ";
+            cin >> peso_var;
+            cout << "----------------------------" << endl;
+            cout << " " << endl;
+
+            Pessoa[i].nome = nome_var;
+            Pessoa[i].idade = idade_var;
+            Pessoa[i].gen = gen_var;
+            Pessoa[i].peso = peso_var;
+
+        }
+
+    }
+
+    if (!found) {
+        cout << " " << endl;
+        cout << "----------------------------" << endl;
+        cout << "Não encontrado" << endl;
+        cout << "----------------------------" << endl;
+        cout << " " << endl;
+    }
+
+    count = 0;
+}
+
+void listar (pessoas Pessoa[], int &i) {
+
+    count_elm(Pessoa,i);
+
+    for (int i=0 ; i<count; i++) {
+
+        cout << " " << endl;
+        cout << "----------------------------" << endl;
+        cout << "Nome: " << Pessoa[i].nome << endl;
+        cout << "Idade: " << Pessoa[i].idade << endl;
+        cout << "Genero: " << Pessoa[i].gen << endl;
+        cout << "Peso: " << Pessoa[i].peso << endl;
+        cout << "----------------------------" << endl;
+        cout << " " << endl;
+
+    }
+
+    count = 0;
+}
+
+void remover (pessoas Pessoa[], int &i) {
+    count_elm(Pessoa, i);
+    string pesquisa;
+
+    cout << " " << endl;
+    cout << "----------------------------" << endl;
+    cout << "Quem deseja remover?" << endl;
+    cin >> pesquisa;
+
+    for (int i=0; i<count; i++) {
+        if (pesquisa == Pessoa[i].nome) {
+
+            found = true;
+
+            Pessoa[i].nome = "X";
+            Pessoa[i].idade = 0;
+            Pessoa[i].gen = 'X';
+            Pessoa[i].peso = 0;
+
+            cout << "----------------------------" << endl;
+            cout << "REMOVIDO!!!!" << endl;
+            cout << "----------------------------" << endl;
+            cout << " " << endl;
+
+        }
+
+    }
+
+    if (!found) {
+        cout << " " << endl;
+        cout << "----------------------------" << endl;
+        cout << "Não encontrado" << endl;
+        cout << "----------------------------" << endl;
+        cout << " " << endl;
+    }
+
+    count = 0;
+}
 
 int main() {
 
+    pessoas P[MAX];
+    int i;
     int cursor;
-    int i = 0;
-    pessoas pss[MAX];
-    pessoas aux;
 
     while (true) {
 
@@ -193,39 +190,37 @@ int main() {
         cout << "2- listar" << endl;
         cout << "3- alterar" << endl;
         cout << "4- remover" << endl;
-        cout << "5- sair do programa" << endl;
+        cout << "5- sair" << endl;
         cin >> cursor;
 
         switch (cursor) {
 
             case 1:
 
-                aux.cadastro(pss, i);
+                cadastrar(P, i);
 
             break;
-
             case 2:
 
-                aux.listar(pss, i);
+                listar(P, i);
 
             break;
             case 3:
 
-                aux.alterar(pss, i);
+                alterar(P,i);
 
             break;
             case 4:
 
-                aux.remover(pss, i);
+                remover(P, i);
 
             break;
             case 5:
 
-                cout << "Você saiu do programa!" << endl;
+                cout << "Você saiu do programa" << endl;
                 return 1;
         }
+
     }
-
     return 0;
-
 }

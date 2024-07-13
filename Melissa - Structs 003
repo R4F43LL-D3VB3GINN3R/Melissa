@@ -1,0 +1,132 @@
+#include <iostream>
+#include <string>
+#define MAX 10
+
+using namespace std;
+
+struct Console {
+
+    string nome, midia;
+    int bits;
+    string jogos[10];
+
+    void ligar_console (Console gamevideo) {
+
+        if (!gamevideo.nome.empty()) {
+
+            cout << "O console " << gamevideo.nome << "esta ligado" << endl;
+
+        }else {
+
+            cout << "O console não foi encontrado em nosso sistema" << endl;
+        }
+    }
+};
+
+int main()
+{
+    Console array_csl[3]; // vetor dos jogos
+
+    // consoles
+
+    array_csl[0].nome = "Super Nintendo";
+    array_csl[0].midia = "Cartucho";
+    array_csl[0].bits = 16;
+    string jogos_iniciais[MAX] = {"Super Mario World", "Super Mario All-Stars", "Donkey Kong Country", "Street Fighter II: The World Warrior", "Donkey kong Country 2: Diddy's Kong Quest", "The Legend of Zelda: A Link to the Past", "Super Mario World 2: Yoshi's Island", "Street Fighter II Turbo", "Donkey Kong Country 3: Dixie Kong's Double Trouble!", "Super Mario Kart"};
+
+    // Copiando da primeira a ultima linha e jogando no vetor de jogos
+    std::copy(begin(jogos_iniciais), end(jogos_iniciais), begin(array_csl[0].jogos));
+
+    array_csl[1].nome = "Nintendo 64";
+    array_csl[1].midia = "Cartucho";
+    array_csl[1].bits = 64;
+    string jogos_iniciais2[MAX] = {"Super Mario 64", "Mario Kart 64", "GoldenEye", "Zelda: Ocarina Of Time", "Super Smash Bros", "Pokémon Stadium", "Donkey Kong 64", "Diddy Kong Racing", "Star Fox 64", "Banjo-Kazooie"};
+
+    // Copiando da primeira a ultima linha e jogando no vetor de jogos
+    std::copy(begin(jogos_iniciais2), end(jogos_iniciais2), begin(array_csl[1].jogos));
+
+    array_csl[2].nome = "Playstation 2";
+    array_csl[2].midia = "DVD-ROM";
+    array_csl[2].bits = 128;
+    string jogos_iniciais3[MAX] = {"GTA San Andreas", "Gran Turismo 3: A-Spec", "Gran Turismo 4", "GTA Vice City", "Final Fantasy X", "GTA III", "Metal Gear Solid 2: Sons Of Liberty", "Final Fantasy XII", "Tekken 5", "Kingdom Hearts"};
+
+    // Copiando da primeira a ultima linha e jogando no vetor de jogos
+    std::copy(begin(jogos_iniciais3), end(jogos_iniciais3), begin(array_csl[2].jogos));
+
+    //MENU
+
+    int cursor = 0;
+    bool found = false;
+
+    Console pesquisar; // PESQUISAR DENTRO DA ESTRUTURA
+    string nome_console = " ";
+
+    while (true) {
+
+        // Menu
+        cout << "------------MENU------------" << endl;
+        cout << "1. procurar jogo de console" << endl;
+        cout << "2. sair" << endl;
+        cout << "Opcao -> ";
+        cin >> cursor;
+        cout << "----------------------------" << endl;
+
+        switch (cursor) {
+
+            case 1:
+
+                cin.ignore(); //limpando o buffer de entrada
+                cout << "Digite o nome do console: ";
+                getline(cin, pesquisar.nome); // Lê a linha de entrada e armazena no campo nome da variável pesquisar.
+                cout << " " << endl;
+
+                cout << "----------------------------" << endl;
+                cout << "Jogos:" << endl;
+
+                for (int i = 0; i < 3; i++) { //  Inicia um loop para percorrer o array de consoles.
+
+                    if (pesquisar.nome == array_csl[i].nome) { //  Verifica se o nome digitado pelo usuário corresponde ao nome de algum console no array.
+
+                        found = true;
+                        nome_console = array_csl[i].nome; // Armazena o nome do console encontrado em nome_console.
+
+                    }
+                }
+
+            if (!found) {
+
+                cout << "----------------------------" << endl;
+                cout << "Console não existe em nosso sistema" << endl;
+                cout << "----------------------------" << endl;
+                cout << " " << endl;
+
+            } else {
+
+                for (int i=0; i<3; i++) { // Inicia um loop para percorrer novamente o array de consoles.
+
+                   1 if (nome_console == array_csl[i].nome) { //  Verifica se nome_console corresponde a algum console no array.
+
+                        for (int c = 0; c < 10; c++) { // Inicia um loop para percorrer o array de jogos do console encontrado.
+
+                            // EXIBINDO OS JOGOS
+                            cout << array_csl[i].jogos[c] << endl;
+                            cout << "----------------------------" << endl;
+                        }
+                    }
+                }
+
+                cout << " " << endl;
+            }
+
+            break;
+
+            case 2:
+
+                cout << "---------------------------" << endl;
+                cout << "Encerrando aplicação" << endl;
+                cout << "---------------------------" << endl;
+                return 1;
+        }
+    }
+    return 0;
+}

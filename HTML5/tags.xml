@@ -1,0 +1,54 @@
+Tags de Texto
+
+<b> - Negrito
+<strong> - Ênfase forte
+<i> - Itálico
+<em> - Ênfase
+<u> - Sublinhado
+<s> - Tachado
+<mark> - Texto marcado
+<small> - Texto pequeno
+
+Tags de Lista
+
+<ul> - Lista não ordenada
+<ol> - Lista ordenada
+<li> - Item de lista
+<dl> - Lista de definição
+<dt> - Termo da definição
+<dd> - Descrição do termo
+
+Tags de Tabela
+
+<table> - Tabela
+<tr> - Linha da tabela
+<th> - Cabeçalho da tabela
+<td> - Célula da tabela
+<thead> - Cabeçalho do grupo de colunas
+<tbody> - Corpo da tabela
+<tfoot> - Rodapé da tabela
+
+Tags de Mídia
+
+<img> - Imagem
+<audio> - Áudio
+<video> - Vídeo
+<source> - Fonte para mídia
+<track> - Legendas para mídia
+  
+Tags de Formulário
+  
+<form> - Formulário
+<input> - Campo de entrada
+<textarea> - Área de texto
+<button> - Botão
+<select> - Menu suspenso
+<option> - Opção do menu
+<label> - Rótulo para entrada
+<fieldset> - Grupo de campos
+<legend> - Legenda do grupo de campos
+
+Tags de Navegação
+
+<nav> - Seção de navegação
+<a> - Link
